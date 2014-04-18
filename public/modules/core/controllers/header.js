@@ -4,15 +4,22 @@ angular.module('mean.core').controller('HeaderController', ['$scope', 'Authentic
 	function($scope, Authentication) {
 		$scope.authentication = Authentication;
 		$scope.isCollapsed = false;
+		$scope.format = 'M/d/yy h:mm:ss a';
 
 		$scope.menu = [{
-			title: 'Articles',
-			link: 'articles',
-			uiRoute: '/articles'
-		}, {
-			title: 'New Article',
-			link: 'articles/create',
-			uiRoute: '/articles/create'
+			name: 'Article',
+			items: [
+				{
+					title: 'Articles',
+					link: 'articles',
+					uiRoute: '/articles'
+				},
+				{
+					title: 'New Article',
+					link: 'articles/create',
+					uiRoute: '/articles/create'
+				}
+			]
 		}];
 
 		$scope.toggleCollapsibleMenu = function() {

@@ -36,6 +36,9 @@
 	<link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css">
 	<link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap-theme.css">
 
+	<!--bootstrap-datetimepicker-->
+	<link href="/lib/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
+
 	<!-- Application CSS -->
 	<link rel="stylesheet" href="/css/common.css">
 
@@ -62,16 +65,28 @@
 		var user = {{ user | json | safe }};
 	</script>
 
+	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+
+	<!--Google Map API-->
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChK4HcKCFw-Ds89VP1Z1d8-nwupbgRGMY&sensor=false&libraries=visualization"></script>
+	
 	<!--AngularJS-->
 	<script type="text/javascript" src="/lib/angular/angular.js"></script>
 	<script type="text/javascript" src="/lib/angular-resource/angular-resource.js"></script>
 	<script type="text/javascript" src="/lib/angular-cookies/angular-cookies.js"></script>
 	<script type="text/javascript" src="/lib/angular-animate/angular-animate.js"></script>
 
+	<script type="text/javascript" src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+
 	<!--Angular UI-->
 	<script type="text/javascript" src="/lib/angular-bootstrap/ui-bootstrap.js"></script>
 	<script type="text/javascript" src="/lib/angular-ui-utils/ui-utils.js"></script>
 	<script type="text/javascript" src="/lib/angular-ui-router/release/angular-ui-router.js"></script>
+
+	<!--bootstrap-datetimepicker-->
+	<script type="text/javascript" src="/lib/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="/lib/bootstrap-datetimepicker/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
+
 
 	<!--AngularJS Application Init-->
 	<script type="text/javascript" src="/js/config.js"></script>
@@ -84,7 +99,9 @@
 
 	{% if process.env.NODE_ENV === 'development' %}
 		<!--Livereload script rendered -->
+		<!--
 		<script type="text/javascript" src="http://localhost:35729/livereload.js"></script>
+		-->
 	{% endif %}
 </body>
 

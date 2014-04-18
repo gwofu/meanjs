@@ -1,0 +1,70 @@
+<section class="container" data-ng-controller="AddressController" data-ng-init="findOne()">
+	<div class="page-header">
+		<h1>Address</h1>
+	</div>
+	<div class="col-md-12">
+		<form name="addressForm" class="form-horizontal">
+			<fieldset>
+				<div class="row">
+					<div class="col-md-5">
+						<div class="form-group">
+							<label class="control-label">Street</label>
+							<div class="controls">
+								<input type="text" data-ng-model="address.street" class="form-control" ng-readonly="true">
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-5">
+						<div class="form-group">
+							<label class="control-label">City</label>
+							<div class="controls">
+								<input type="text" data-ng-model="address.city" class="form-control" ng-readonly="true">
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-5">
+						<div class="form-group">
+							<label class="control-label">State</label>
+							<div class="controls">
+								<input type="text" data-ng-model="address.state" class="form-control" ng-readonly="true">
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-5">
+						<div class="form-group">
+							<label class="control-label">Zip</label>
+							<div class="controls">
+								<input type="text" data-ng-model="address.zip" class="form-control" ng-readonly="true">
+							</div>
+						</div>
+					</div>
+				</div>
+			</fieldset>
+			
+			<div class="row">
+				<div class="col-md-5">
+					<div class="pull-right" data-ng-show="authentication.user._id == address.user._id">
+						<a class="btn btn-primary" href="/#!/addresses/{{address._id}}/edit">
+							<i class="glyphicon glyphicon-edit"></i>
+						</a>
+						<a class="btn btn-primary" data-ng-click="remove();">
+							<i class="glyphicon glyphicon-trash"></i>
+						</a>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+
+
+		
+</section>

@@ -1,0 +1,50 @@
+<section data-ng-controller="EventsController" data-ng-init="findOne()">
+	<div class="page-header">
+		<h1>Edit Event</h1>
+	</div>
+	<div class="col-md-12">
+		<form class="form-horizontal" data-ng-submit="update()">
+			<fieldset>
+				<div class="form-group">
+					<label class="control-label" for="title">Event Title</label>
+					<div class="controls">
+						<input type="text" data-ng-model="event.title" id="title" class="form-control" placeholder="Title" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="dtp_input1" class="control-label">Event Date</label>
+					<div class="input-group date form_datetime col-md-5">
+						<input class="form-control" size="16" type="text" data-ng-model="event.date">
+						<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+						<span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="content">Event Description</label>
+					<div class="controls">
+						<textarea data-ng-model="event.content" id="content" class="form-control" cols="30" rows="3" placeholder="Content"></textarea>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="type">Event Type</label>
+					<div class="controls">
+						<select class="form-control" data-ng-model="event.type" ng-options="option.name as option.name group by option.value for option in options"></select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="location">Event Location</label>
+					<select class="form-control" data-ng-model="event.address._id" ng-options="a._id as a.street for a in addresses" required>
+						<option value="" selected> Please Select </option>
+					</select>
+				</div>
+				<div class="form-group">
+					<input type="submit" value="Update" class="btn btn-default">
+				</div>
+			</fieldset>
+		</form>
+	</div>
+</section>
+
+<script type="text/javascript">
+	$('.form_datetime').datetimepicker();
+</script>

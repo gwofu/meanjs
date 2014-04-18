@@ -7,3 +7,6 @@ a.undecorated-link:hover {
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
 	display: none !important;
 }
+#map-canvas { 
+	height: 450px;
+}
