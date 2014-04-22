@@ -11,7 +11,6 @@ angular.module('mean.common')
 		template: '<p style="background-color:{{color}}">Hello World</p>',
 		link: function(scope, elem, attrs) {
 			elem.bind('click', function() {
-				alert("click");
 				scope.$apply(function() {
 					scope.color = 'white';
 				});
@@ -39,9 +38,48 @@ angular.module('mean.common')
 		data: heatmapPoints
 	});
 
-	var map;
+	var map, map2;
 	var geocoder = new google.maps.Geocoder();
 	var markers = {};
+
+	function setupInfobox(map, marker, event) {
+
+		var boxText = document.createElement("div");
+		boxText.className = 'panel panel-primary';
+		boxText.innerHTML = '<div class="panel-heading">' + event.title + 
+			'</div><div class="panel-body">' + event.content + '</div>';
+
+		var myOptions = {
+			content: boxText
+			,disableAutoPan: false
+			,maxWidth: 0
+			,pixelOffset: new google.maps.Size(-200, 0)
+			,zIndex: null
+			,boxStyle: {
+				//background: 'url("tipbox.gif") no-repeat',
+				opacity: 1,
+				width: '400px'
+			}
+			,closeBoxMargin: '2px 2px 2px 2px'
+			,closeBoxURL: 'http://www.google.com/intl/en_us/mapfiles/close.gif'
+			,infoBoxClearance: new google.maps.Size(1, 1)
+			,isHidden: false
+			,pane: 'floatPane'
+			,enableEventPropagation: false
+		};
+
+		var ib = new InfoBox(myOptions);
+
+		google.maps.event.addListener(marker, 'click', function (e) {
+			var isOpen = ib.getMap();
+			if (isOpen) {
+				ib.close(map, this);
+			} else {
+				ib.open(map, this);
+			}
+		});
+
+	}
 
 	function postLink(scope, element, attrs, ctrl) {
 		
@@ -49,11 +87,12 @@ angular.module('mean.common')
 		// var eventCtrlScope = angular.element($('#eventsController')).scope();
 
 		var mapOptions = {
-			center: new google.maps.LatLng(41.8781136, -87.62979819999998),
+			//center: new google.maps.LatLng(41.8781136, -87.62979819999998),
 			zoom: 12
 		};
 
 		map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+		map2 = new google.maps.Map(document.getElementById('map-2'), mapOptions);
 		
 		heatmap.setMap(map);
 
@@ -86,24 +125,40 @@ angular.module('mean.common')
 				var marker = new google.maps.Marker( {
 					map: map,
 					position: myLatlng,
-					//icon: 'img/coffee.png',
+					icon: 'img/animals/bear.png',
 					title: event.title,
 				});
 
 				markers[event._id] = marker;
 
-				var infowindow = new google.maps.InfoWindow({
-					content: 'Marker Info Window – ID : ' + event._id
-				});
-
-				google.maps.event.addListener(marker, 'click', function() {
-					infowindow.open(map, marker);
-				});
-
+				setupInfobox(map, marker, event);
 
 			});
 
 			map.fitBounds (bounds);
+			map2.fitBounds (bounds);
+
+			//Listening center_changed event of map 1 to
+			//change center of map 2
+			google.maps.event.addListener(map, 'center_changed',
+				function() {
+					map2.setCenter(map.getCenter());
+				}
+			);
+			//Listening zoom_changed event of map 1 to change
+			//zoom level of map 2
+			google.maps.event.addListener(map, 'zoom_changed',
+				function() {
+					map2.setZoom(map.getZoom());
+				}
+			);
+
+			google.maps.event.addListener(map2, 'click',
+				function(e) {
+					map.setCenter(e.latLng);
+				}
+			);
+
 		};
 
 		scope.$on('select.event', function (event, eventId) {

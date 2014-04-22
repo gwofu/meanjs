@@ -13,7 +13,6 @@ var mongoose = require('mongoose'),
 exports.create = function(req, res) {
 	var event = new Event(req.body);
 	event.user = req.user;
-
 	event.save(function(err) {
 		if (err) {
 			return res.send('users/signup', {
@@ -73,7 +72,18 @@ exports.delete = function(req, res) {
  * List of Events
  */
 exports.list = function(req, res) {
-	Event.find().sort('-created').populate('user', 'displayName').populate('address', 'displayname loc').exec(function(err, events) {
+	console.log('------------ list ------------------');
+
+	var query = {};
+
+	if (req.query.action && req.query.action === 'findByCityState') {
+		console.log('------------ findByCityState ------------------');
+		console.log('------------ req.query.city =' + req.query.city);
+		console.log('------------ req.query.state =' + req.query.state);
+		query = { 'address.city': req.query.city, 'address.state': req.query.state };
+	}
+
+	Event.find(query).sort('-created').populate('user', 'displayName').exec(function(err, events) {
 		if (err) {
 			res.render('error', {
 				status: 500
@@ -95,6 +105,10 @@ exports.eventByID = function(req, res, next, id) {
 		next();
 	});
 };
+
+exports.findByCityState = function(req, res, next) {
+	console.log('------------ findByCityState ------------------');
+}
 
 /**
  * Event authorization middleware

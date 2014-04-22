@@ -43,7 +43,6 @@ angular.module('mean.events')
 
 		Addresses.search(function(addresses) {
 			if (addresses) {
-				console.log('=================');
 				$scope.addresses = addresses;
 			}
 			else {
@@ -51,16 +50,32 @@ angular.module('mean.events')
 			}
 		});
 
+		function getAddressById(id) {
+			var address = $filter('filter')($scope.addresses, id, true);
+			console.log("--------------------");
+			console.log('address=' + JSON.stringify(address));
+			return address[0];
+		}
 		$scope.create = function() {
 
 			console.log('========location=========');
 			console.log($scope.location);
+
+			var selectedAddress = getAddressById(this.addressId);
+
 			var event = new Events({
 				title: this.title,
 				content: this.content,
 				type: this.type,
 				date: this.date,
-				address: this.address
+				address: {
+					_id: selectedAddress._id,
+					city: selectedAddress.city,
+					state: selectedAddress.state,
+					zip: selectedAddress.zip,
+					loc: selectedAddress.loc,
+					displayName: selectedAddress.displayname
+				}
 				//loc: [89.0, 67.1]
 				//loc: this.address.loc
 			});
@@ -98,6 +113,11 @@ angular.module('mean.events')
 			if (!event.updated) {
 				event.updated = [];
 			}
+
+			var selectedAddress = getAddressById(this.addressId);
+			console.log('selectedAddress=' + JSON.stringify(selectedAddress));
+			event.address = selectedAddress;
+
 			//event.address = this.address._id;
 			event.updated.push(new Date().getTime());
 
@@ -113,8 +133,6 @@ angular.module('mean.events')
 				$scope.events = events;
 				$scope.$broadcast('load.event.end', {});
 			});
-
-
 		};
 
 		$scope.findOne = function() {
@@ -133,5 +151,17 @@ angular.module('mean.events')
 			$scope.filteredEvents = $filter('filter')($scope.events, query);
 			$scope.$broadcast('filtered.events', {});
 		};
+
+		$scope.findByCityState = function(city, state) {
+			console.log("findByCityState...");
+			Events.findByCityState({
+				city: city,
+				state: state
+			}, function(events) {
+				$scope.events = events;
+				$scope.$broadcast('load.event.end', {});
+			});
+		};
+
 	}
 ]);

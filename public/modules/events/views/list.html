@@ -8,7 +8,7 @@
 				<a data-ng-repeat="event in events" data-ng-href="#!/events/{{event._id}}" class="list-group-item">
 					<h4 class="list-group-item-heading">{{event.title}}</h4>
 					<p class="list-group-item-text">{{event.content}}</p>
-					<p class="list-group-item-text">{{event.loc}}</p>
+					<p class="list-group-item-text">{{event.address.loc}}</p>
 					<small class="list-group-item-text">{{event.created | date:'medium'}} / {{event.user.displayName}}</small>
 				</a>
 			</div>

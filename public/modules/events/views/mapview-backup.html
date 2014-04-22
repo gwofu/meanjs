@@ -1,0 +1,41 @@
+<section id="eventsController" class="container" ng-controller="EventsController" data-ng-init="find()">
+  <div class="row">
+    <div class="col-md-3">
+      <div>
+        <input type="text" ng-model="color" placeholder="Enter a color" />
+        <hello-world color="color"></hello-world>
+      </div>
+      <div>
+        <input type="text" ng-model="city" placeholder="city" />
+        <input type="text" ng-model="state" placeholder="state" />
+        <button class="btn btn-info btn-xs" ng-click="findByCityState(city, state)">Search by City</button>
+      </div>
+      <div id="map-2" style="height:200px; display:none"/>
+      <div class="page-header">
+        <h3>Event Locations</h3>
+        <span class="glyphicon glyphicon-filter"></span>&nbsp;<input type="search" ng-model="q"placeholder="filter events" />
+        <button class="btn btn-info btn-xs" ng-click="getFilteredEvents(q)">Refresh Map</button>
+      </div>
+      <div class="list-group">
+        <a data-ng-repeat="event in events | filter:q" data-toggle="collapse" href="#collapse{{$index}}" ng-click="selectEvent(event._id)" class="list-group-item">
+          <h5 class="list-group-item-heading">{{event.title}}<span class="caret pull-right"></span></h5>
+          <div id="collapse{{$index}}" class="collapse">
+            <p class="list-group-item-text">Type: {{event.type}}</p> 
+            <p class="list-group-item-text">Description: {{event.content}}</p> 
+            <p class="list-group-item-text">Address: {{event.address.displayName}}</p>
+            <span class="glyphicon glyphicon-time"></span>
+            <small class="list-group-item-text">{{event.created | date:'medium'}}</small>
+            <span class="glyphicon glyphicon-user"></span>
+            <small class="list-group-item-text">{{event.user.displayName}}</small>
+          </div>
+        </a>
+      </div>
+      <div class="alert alert-warning text-center" data-ng-hide="!events || events.length">
+        No events yet, why don't you <a href="/#!/events/create">create one</a>?
+      </div>
+    </div>
+    <div class="col-md-9">
+      <google-map></google-map>
+    </div>
+  </div>
+</section>

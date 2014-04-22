@@ -11,12 +11,29 @@ var base = require('./base');
 var EventSchema = base.makeSchema({
 		type: { type: String, trim: true },
 		date: { type: Date },
+		address: {
+			_id: { type: String, trim: true },
+			city: { type: String, trim: true },
+			state: { type: String, trim: true },
+			zip: { type: String, trim: true },
+			loc: { type: [Number], index: '2d' },
+			displayName: { type: String, trim: true }
+		}
+	});
+
+var OldEventSchema = base.makeSchema({
+		type: { type: String, trim: true },
+		date: { type: Date },
+		city: { type: String, trim: true },
+		state: { type: String, trim: true },
+		zip: { type: String, trim: true },
 		loc: { type: [Number], index: '2d' },
 		address: {
 			type: Schema.ObjectId,
 			ref: 'Address'
 		}
 	});
+
 
 /**
  * Validations
@@ -32,7 +49,7 @@ EventSchema.statics = {
 	load: function(id, cb) {
 		this.findOne({
 			_id: id
-		}).populate('user', 'displayName').populate('address','displayname').exec(cb);
+		}).populate('user', 'displayName').exec(cb);
 	}
 };
 

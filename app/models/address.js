@@ -10,6 +10,7 @@ var AddressSchema = new Schema({
 	zip: { type: String, trim: true },
 	displayname: { type: String, trim: true },
 	loc: { type: [Number], index: '2d' },
+	default: { type: Boolean, default: false },
 	user: {
 		type: Schema.ObjectId,
 		ref: 'User'
