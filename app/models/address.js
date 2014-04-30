@@ -8,7 +8,7 @@ var AddressSchema = new Schema({
 	city: { type: String, trim: true },
 	state: { type: String, trim: true },
 	zip: { type: String, trim: true },
-	displayname: { type: String, trim: true },
+	displayName: { type: String, trim: true },
 	loc: { type: [Number], index: '2d' },
 	default: { type: Boolean, default: false },
 	user: {
@@ -25,7 +25,7 @@ AddressSchema.statics = {
 	load: function(id, cb) {
 		this.findOne({
 			_id: id
-		}).populate('user', 'displayname').exec(cb);
+		}).populate('user', 'displayName').exec(cb);
 	},
 	loadByUser: function(userid, cb) {
 		this.find({

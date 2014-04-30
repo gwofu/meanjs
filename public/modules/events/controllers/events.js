@@ -52,10 +52,9 @@ angular.module('mean.events')
 
 		function getAddressById(id) {
 			var address = $filter('filter')($scope.addresses, id, true);
-			console.log("--------------------");
-			console.log('address=' + JSON.stringify(address));
 			return address[0];
 		}
+
 		$scope.create = function() {
 
 			console.log('========location=========');
@@ -74,7 +73,7 @@ angular.module('mean.events')
 					state: selectedAddress.state,
 					zip: selectedAddress.zip,
 					loc: selectedAddress.loc,
-					displayName: selectedAddress.displayname
+					displayName: selectedAddress.displayName
 				}
 				//loc: [89.0, 67.1]
 				//loc: this.address.loc
@@ -114,7 +113,9 @@ angular.module('mean.events')
 				event.updated = [];
 			}
 
-			var selectedAddress = getAddressById(this.addressId);
+			console.log('event=' + JSON.stringify(event));
+
+			var selectedAddress = getAddressById(event.address._id);
 			console.log('selectedAddress=' + JSON.stringify(selectedAddress));
 			event.address = selectedAddress;
 
@@ -153,7 +154,6 @@ angular.module('mean.events')
 		};
 
 		$scope.findByCityState = function(city, state) {
-			console.log("findByCityState...");
 			Events.findByCityState({
 				city: city,
 				state: state

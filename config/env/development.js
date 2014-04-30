@@ -3,7 +3,7 @@
 module.exports = {
 	db: 'mongodb://localhost/mean-dev',
 	app: {
-		title: 'MEAN.JS - Development Environment'
+		title: '心動時間銀行 - Development Environment'
 	},
 	facebook: {
 		clientID: 'APP_ID',

@@ -1,7 +1,16 @@
 'use strict';
 
-angular.module('mean.core').controller('HomeController', ['$scope', 'Authentication', function ($scope, Authentication) {
-    $scope.authentication = Authentication;
+angular.module('mean.core').controller('HomeController', ['$scope', 'Authentication', 'EventService',
+	function ($scope, Authentication, EventService) {
+		$scope.authentication = Authentication;
+
+		EventService.findAll(function(events) {
+			console.log('EventService.findAll');
+			console.log(events);
+			$scope.events = events;
+		});
+
+
 }]);
 
 angular.module('mean.core').controller('DateTimePickerDemoCtrl', function ($scope, $timeout) {

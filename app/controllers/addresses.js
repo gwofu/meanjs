@@ -70,7 +70,7 @@ exports.list = function(req, res) {
 		query = {user: req.user.id};
 	}
 
-	Address.find(query).sort('-created').populate('user', 'displayname').exec(function(err, addresses) {
+	Address.find(query).sort('-created').populate('user', 'displayName').exec(function(err, addresses) {
 		if (err) {
 			res.render('error', {
 				status: 500

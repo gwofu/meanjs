@@ -44,8 +44,12 @@
 					</div>
 					<div id="collapseFilter" class="panel-collapse collapse">
 						<div class="panel-body">
-							<span class="glyphicon glyphicon-filter"></span>&nbsp;<input type="search" ng-model="q"placeholder="filter events" />
-							<button class="btn btn-info btn-xs" ng-click="getFilteredEvents(q)">Refresh Map</button>
+							<div class="input-group">
+								<input type="search" class="form-control" ng-model="q"placeholder="filter events" />
+								<span class="input-group-btn">
+									<button class="btn btn-search" ng-click="getFilteredEvents(q)">Refresh Map</button>
+								</span>
+							</div>
 						</div>
 					</div>
 				</div>

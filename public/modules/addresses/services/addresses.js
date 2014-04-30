@@ -20,3 +20,27 @@ angular.module('mean.addresses').factory('Addresses', ['$resource', function($re
 		}
 	);
 }]);
+
+angular.module('mean.addresses').service('AddressService', function(Addresses) {
+
+	this.findByUser = function(callback) {
+		Addresses.search(function(data) {
+			callback(data);
+		});
+	};
+
+	this.findById = function(id, callback) {
+			Addresses.get({
+				addressId: id
+			}, function(data) {
+				callback(data);
+			});
+	};
+
+	this.findAll = function(callback) {
+		Addresses.query(function(data) {
+			callback(data);
+		});
+	};
+
+});

@@ -1,10 +1,30 @@
 <section data-ng-controller="HomeController">
 	<div class="bg"></div>
 	<div class="jumbotron">
-		<h1>Hello, world!</h1>
-		<p>...</p>
+		<h1>心動時間銀行</h1>
+		<p>以全民為目標, 鄉鎮市區為範圍, 提供一個交易服務點數 (Service Point) 的網路平台. 服務點數基本以時間為單位. 服務點數的提供可來自任何個人, 政府機關, 組織團體, 或公司行號.  取得服務點數的方法有兩種: 完成別人提供的服務項目或等價物品的捐獻或捐款. 特別是老弱婦孺, 學生或失業者, 利用自己的才能或時間服務他人和社區, 不但可以拓展人際關係豐富精神生活, 並且獲得的服務點數可用來換取其他的服務或商品. 希望這樣的一個平台能夠促進人與人之間的交流而讓生活更有意義.</p>
 		<p><a class="btn btn-primary btn-lg" role="button">Learn more</a></p>
 	</div>
+
+	<div class="row">
+		<div data-ng-repeat="event in events">
+			<div class="col-xs-12 col-sm-6 col-md-4">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h3 class="panel-title"><span class='label label-info'>{{event.type}}</span><span class='pull-right'>{{event.title}}</span></h3>
+					</div>
+					<div class="panel-body">
+						{{event.content}}
+					</div>
+					<div class="panel-footer"><small>{{event.date | date:'medium'}}<br/>{{event.address.displayName}}<br/>{{event.user.displayName}}</small>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
 
 <p>
 Page Content
@@ -67,11 +87,11 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius qu
 <script>
 var jumboHeight = $('.jumbotron').outerHeight();
 function parallax(){
-    var scrolled = $(window).scrollTop();
-    $('.bg').css('height', (jumboHeight-scrolled) + 'px');
+	var scrolled = $(window).scrollTop();
+	$('.bg').css('height', (jumboHeight-scrolled) + 'px');
 }
 
 $(window).scroll(function(e){
-    parallax();
+	parallax();
 });
 </script>

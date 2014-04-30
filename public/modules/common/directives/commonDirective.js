@@ -19,6 +19,7 @@ angular.module('mean.common')
 
 				scope.location = results[0].geometry.location;
 				scope.displayname = results[0].formatted_address;
+				console.log('displayName=' + scope.displayname);
 			} else {
 				alert('Geocode was not successful for the following reason: ' + status);
 			}
@@ -43,7 +44,6 @@ angular.module('mean.common')
 		});
 
 		scope.saveAddress = function() {
-			
 			$('#myModal').modal('hide');
 		};
 	}

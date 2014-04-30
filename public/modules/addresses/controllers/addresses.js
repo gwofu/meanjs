@@ -14,7 +14,7 @@ angular.module('mean.addresses')
 				city: this.address.city,
 				state: this.address.state,
 				zip: this.address.zip,
-				displayname: this.address.displayname,
+				displayName: this.address.displayName,
 				loc: [this.address.location.k, this.address.location.A]
 			});
 			
