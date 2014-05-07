@@ -76,11 +76,13 @@ exports.list = function(req, res) {
 
 	var query = {};
 
-	if (req.query.action && req.query.action === 'findByCityState') {
+	if (req.query.action && req.query.action === 'listByUser') {
+		query = {user: req.user.id};
+	} else if (req.query.action && req.query.action === 'findByCityState') {
 		console.log('------------ findByCityState ------------------');
 		console.log('------------ req.query.city =' + req.query.city);
 		console.log('------------ req.query.state =' + req.query.state);
-		query = { 'address.city': req.query.city, 'address.state': req.query.state };
+		query = {'address.city': req.query.city, 'address.state': req.query.state};
 	}
 
 	Event.find(query).sort('-created').populate('user', 'displayName').exec(function(err, events) {
@@ -108,7 +110,7 @@ exports.eventByID = function(req, res, next, id) {
 
 exports.findByCityState = function(req, res, next) {
 	console.log('------------ findByCityState ------------------');
-}
+};
 
 /**
  * Event authorization middleware

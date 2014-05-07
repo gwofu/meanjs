@@ -9,9 +9,8 @@ angular.module('mean.core').controller('HomeController', ['$scope', 'Authenticat
 			console.log(events);
 			$scope.events = events;
 		});
-
-
-}]);
+	}
+]);
 
 angular.module('mean.core').controller('DateTimePickerDemoCtrl', function ($scope, $timeout) {
 		$scope.dateTimeNow = function() {

@@ -81,24 +81,6 @@ exports.list = function(req, res) {
 	});
 };
 
-
-/**
- * List of Address by user
- */
-exports.listByUser = function(req, res) {
-	console.log('==============listByUser==============');
-	console.log('req.user.id=' + req.user.id);
-	Address.find({user: req.user.id}).exec(function(err, addresses) {
-		if (err) {
-			res.render('error', {
-				status: 500
-			});
-		} else {
-			res.jsonp(addresses);
-		}
-	});
-};
-
 /**
  * Address middleware
  */

@@ -16,9 +16,13 @@ angular.module('mean.core')
 					link: 'events',
 					uiRoute: '/events'
 				}, {
-					title: 'New Event',
+					title: 'Add Event',
 					link: 'events/create',
 					uiRoute: '/events/create'
+				}, {
+					title: 'My Event List',
+					link: 'events/listByUser',
+					uiRoute: '/events/listByUser'
 				}, {
 					title: 'Map Event',
 					link: 'events/mapview',
@@ -41,6 +45,24 @@ angular.module('mean.core')
 					title: 'My Address List',
 					link: 'addresses/listByUser',
 					uiRoute: '/addresses/listByUser'
+				}]
+			});
+
+			scope.menu.push(
+			{
+				name: 'Message',
+				items: [{
+					title: 'All Messages (Admin)',
+					link: 'messages',
+					uiRoute: '/messages'
+				}, {
+					title: 'My Message List',
+					link: 'messages/listByUser',
+					uiRoute: '/messages/listByUser'
+				}, {
+					title: 'Inbox',
+					link: 'messages/inbox',
+					uiRoute: '/messages/inbox'
 				}]
 			});
 			

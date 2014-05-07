@@ -1,0 +1,40 @@
+<div class="bg"></div>
+<div class="jumbotron">
+	<h1>Messages</h1>
+	<p><h2>List messages.</h2></p>
+</div>
+
+<section class="container" data-ng-controller="MessageController" data-ng-init="find()">
+
+	<div class="row">
+		<div class="col-md-6">
+			<div class="list-group">
+				<div data-ng-repeat="message in messages | orderBy:'date':true">
+					<div ng-switch on="$index == 0 || (message.created.substr(0,10) != messages[$index - 1].created.substr(0,10))">
+						<h3 ng-switch-when="true">{{message.created | date:'EEEE, MMM d'}}</h3>
+					</div>
+					<a data-ng-href="#!/messages/{{message._id}}" class="list-group-item">
+						<span class="glyphicon glyphicon-cog"></span>
+					</a>
+
+					<div class="panel panel-danger">
+						<div class="panel-heading">
+							<h3 class="panel-title">
+								<span class='label label-info'>{{message.type}}</span> {{message.title}}
+								<span class="pull-right">To: {{message.to.displayName}}<span>
+							</h3>
+						</div>
+						<div class="panel-body">
+							{{message.content}}
+						</div>
+						<div class="panel-footer"><small>{{message.created | date:'medium'}}</small>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</section>
+
+

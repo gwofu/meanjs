@@ -11,7 +11,7 @@ angular.module('mean.events').factory('Events', ['$resource', function($resource
 		findByUser: {
 			method: 'GET',
 			params: {
-				action: 'findByUser'
+				action: 'listByUser'
 			},
 			isArray: true
 		},

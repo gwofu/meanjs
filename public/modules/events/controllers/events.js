@@ -2,8 +2,8 @@
 
 angular.module('mean.events')
 .controller('EventsController',
-	['$scope', '$stateParams', '$location', '$filter', 'Authentication', 'Events', 'Addresses',
-	function($scope, $stateParams, $location, $filter, Authentication, Events, Addresses) {
+	['$scope', '$stateParams', '$location', '$filter', 'Authentication', 'Events', 'Addresses', 'Messages', 'MessageService',
+	function($scope, $stateParams, $location, $filter, Authentication, Events, Addresses, Messages, MessageService) {
 		console.log('****** 1 ******');
 
 		$scope.authentication = Authentication;
@@ -113,10 +113,7 @@ angular.module('mean.events')
 				event.updated = [];
 			}
 
-			console.log('event=' + JSON.stringify(event));
-
 			var selectedAddress = getAddressById(event.address._id);
-			console.log('selectedAddress=' + JSON.stringify(selectedAddress));
 			event.address = selectedAddress;
 
 			//event.address = this.address._id;
@@ -128,12 +125,18 @@ angular.module('mean.events')
 		};
 
 		$scope.find = function() {
-			console.log('========find=========');
-
-			Events.query(function(events) {
-				$scope.events = events;
-				$scope.$broadcast('load.event.end', {});
-			});
+			console.log('==============find================');
+			if ($scope.queryByUser) {
+				Events.findByUser(function(events) {
+					$scope.events = events;
+					$scope.$broadcast('load.event.end', {});
+				});
+			} else {
+				Events.query(function(events) {
+					$scope.events = events;
+					$scope.$broadcast('load.event.end', {});
+				});
+			}
 		};
 
 		$scope.findOne = function() {
@@ -160,6 +163,75 @@ angular.module('mean.events')
 			}, function(events) {
 				$scope.events = events;
 				$scope.$broadcast('load.event.end', {});
+			});
+		};
+
+		$scope.selectedEvent = function(event) {
+			$scope.event = event;
+		};
+
+		$scope.inboxMessages = function(event) {
+			$scope.event = event;
+			console.log('event=' + JSON.stringify($scope.event));
+
+			MessageService.findByEventId($scope.event._id, function(messages) {
+				$scope.messages = messages;
+				console.log('messages=' + JSON.stringify(messages));
+			});
+		};
+
+		$scope.replyMessage = function(message, reply) {
+			console.log('message: ' + message);
+			console.log('reply: ' + reply);
+
+			var message = new Messages({
+				to: message.user._id,
+				title: 'Re: ' + message.title,
+				content: reply,
+				type: 2, // 2: reply message
+				event: $scope.event._id
+			});
+			
+			message.$save(function(response) {
+				$scope.messages.unshift(response);
+			});
+		};
+
+		$scope.successFn = function() {
+			console.log('$scope.event._id: ' + $scope.event._id);
+			var title = $('.messageCreate > input').val();
+			var content = $('.messageCreate > textarea').val();
+
+			var message = new Messages({
+				to: $scope.event.user._id,
+				title: title,
+				content: content,
+				type: 1, // 1: request message
+				event: $scope.event._id
+			});
+			
+			message.$save(function(response) {
+				//console.log('Response: ' + response)
+			});
+			
+		};
+
+		$scope.inboxSuccessFn = function() {
+
+		};
+
+		$scope.findMessagesByEvent = function() {
+			console.log('findByEventId called');
+			if (!$scope.event) {
+				console.log('event is not selected');
+				return;
+			}
+
+			console.log('event=' + JSON.stringify($scope.event));
+
+			MessageService.findByEventId($scope.event._id, function(messages) {
+				$scope.messages = messages;
+				console.log('messages=' + JSON.stringify(messages));
 			});
 		};
 

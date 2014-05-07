@@ -44,9 +44,9 @@ angular.module('mean.common')
 
 	function setupInfobox(map, marker, event) {
 
-		var boxText = document.createElement("div");
+		var boxText = document.createElement('div');
 		boxText.className = 'panel panel-primary';
-		boxText.innerHTML = '<div class="panel-heading">' + event.title + 
+		boxText.innerHTML = '<div class="panel-heading">' + event.title +
 			'</div><div class="panel-body">' + event.content + '</div>';
 
 		var myOptions = {
@@ -105,9 +105,6 @@ angular.module('mean.common')
 		};
 
 		scope.showEventLocations = function() {
-			
-			console.log('****showEventLocations*****');
-
 			var events = scope.events;
 			var loc = events[0].address.loc;
 			var myLatlng = new google.maps.LatLng(loc[0], loc[1]);
@@ -116,8 +113,6 @@ angular.module('mean.common')
 			var bounds = new google.maps.LatLngBounds();
 
 			angular.forEach(events, function(event) {
-				console.log("event=" + JSON.stringify(event));
-				
 				loc = event.address.loc;
 				myLatlng = new google.maps.LatLng(loc[0], loc[1]);
 				bounds.extend(myLatlng);
@@ -130,9 +125,7 @@ angular.module('mean.common')
 				});
 
 				markers[event._id] = marker;
-
 				setupInfobox(map, marker, event);
-
 			});
 
 			map.fitBounds (bounds);

@@ -64,16 +64,31 @@
 					<div id="collapseEvents" class="panel-collapse collapse in">
 						<div class="panel-body" style="padding: 0px">
 							<div class="list-group" style="margin: 0px">
-								<a data-ng-repeat="event in events | filter:q" data-toggle="collapse" href="#collapse{{$index}}" ng-click="selectEvent(event._id)" class="list-group-item">
+								<a data-ng-repeat="event in events | filter:q" data-toggle="collapse" href="#collapse{{$index}}" ng-click="selectEvent(event._id)" class="list-group-item" style="padding: 10px 5px">
 									<h5 class="list-group-item-heading">{{event.title}}<span class="caret pull-right"></span></h5>
 									<div id="collapse{{$index}}" class="collapse">
-										<p class="list-group-item-text">Type: {{event.type}}</p> 
-										<p class="list-group-item-text">Description: {{event.content}}</p> 
-										<p class="list-group-item-text">Address: {{event.address.displayName}}</p>
-										<span class="glyphicon glyphicon-time"></span>
-										<small class="list-group-item-text">{{event.created | date:'medium'}}</small>
-										<span class="glyphicon glyphicon-user"></span>
-										<small class="list-group-item-text">{{event.user.displayName}}</small>
+										<table class="table table-bordered">
+											<tr>
+												<td>Type</td>
+												<td>{{event.type}}</td>
+											</tr>
+											<tr>
+												<td>Description</td>
+												<td>{{event.content}}</td>
+											</tr>
+											<tr>
+												<td>Address</td>
+												<td>{{event.address.displayName}}</td>
+											</tr>
+											<tr>
+												<td><span class="glyphicon glyphicon-time"></span></td>
+												<td>{{event.created | date:'medium'}}</td>
+											</tr>
+											<tr>
+												<td><span class="glyphicon glyphicon-user"></span></td>
+												<td>{{event.user.displayName}}</td>
+											</tr>
+										</table>
 									</div>
 								</a>
 							</div>

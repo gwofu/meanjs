@@ -30,11 +30,11 @@ angular.module('mean.addresses').service('AddressService', function(Addresses) {
 	};
 
 	this.findById = function(id, callback) {
-			Addresses.get({
-				addressId: id
-			}, function(data) {
-				callback(data);
-			});
+		Addresses.get({
+			addressId: id
+		}, function(data) {
+			callback(data);
+		});
 	};
 
 	this.findAll = function(callback) {

@@ -22,6 +22,13 @@ angular.module('mean.events').config(['$stateProvider',
 			url: '/events/create',
 			templateUrl: 'modules/events/views/create.html'
 		}).
+		state('eventsByUser', {
+			url: '/events/listByUser',
+			templateUrl: 'modules/events/views/list.html',
+			controller: function($scope) {
+				$scope.queryByUser = true;
+			}
+		}).
 		state('mapEvent', {
 			url: '/events/mapview',
 			templateUrl: 'modules/events/views/mapview.html'
@@ -33,6 +40,10 @@ angular.module('mean.events').config(['$stateProvider',
 		state('editEvent', {
 			url: '/events/:eventId/edit',
 			templateUrl: 'modules/events/views/edit.html'
+		}).
+		state('contactEvent', {
+			url: '/events/:eventId/contact',
+			templateUrl: 'modules/events/views/contact.html'
 		});
 	}
 ]);
