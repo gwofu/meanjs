@@ -1,20 +1,24 @@
-<div id="eventsController" ng-controller="EventsController" data-ng-init="find()">
+<div class="overlap" id="eventsController" ng-controller="EventsController" data-ng-init="find()">
 	<div class="row">
-		<div class="col-md-3">
+		<div id="mapmenu" class="col-md-3" ng-show="showSettingFlag">
 			<div class="panel-group" id="accordion">
 				<div class="panel panel-primary">
 					<div class="panel-heading">
 						<h4 class="panel-title">
 							<a data-toggle="collapse" data-parent="#accordion" href="#collapseSettings">
-								Settings
+								Search Location
 							</a>
 						</h4>
 					</div>
 					<div id="collapseSettings" class="panel-collapse collapse">
 						<div class="panel-body">
-							<input type="text" ng-model="city" placeholder="city" />
-							<input type="text" ng-model="state" placeholder="state" />
-							<button class="btn btn-info btn-xs" ng-click="findByCityState(city, state)">Search by City</button>
+							<input type="search" class="form-control" ng-model="city" placeholder="city" />
+							<div class="input-group">
+								<input type="search" class="form-control" ng-model="state" placeholder="state" />
+								<span class="input-group-btn">
+										<button class="btn btn-info" ng-click="findByCityState(city, state)">Search</button>
+								</span>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -45,7 +49,7 @@
 					<div id="collapseFilter" class="panel-collapse collapse">
 						<div class="panel-body">
 							<div class="input-group">
-								<input type="search" class="form-control" ng-model="q"placeholder="filter events" />
+								<input type="search" class="form-control" ng-model="q" placeholder="filter events" />
 								<span class="input-group-btn">
 									<button class="btn btn-search" ng-click="getFilteredEvents(q)">Refresh Map</button>
 								</span>
@@ -100,8 +104,37 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-9">
-			<google-map></google-map>
-		</div>
 	</div>
+	<section>
+		<google-map></google-map>
+	</section>
 </div>
+
+<script type="text/javascript">
+
+var dragObj = null;
+var x = 0;
+var y = 0;
+
+$(function() {
+	$('#mapmenu').mousedown(function(e) {
+		dragObj = $(this);
+		x = e.pageX - dragObj.offset().left;
+		y = e.pageY - dragObj.offset().top;
+	});
+	$('#mapmenu').mouseup(function(e) {
+		dragObj = null;
+	});
+	$('#mapmenu').mousemove(function(e) {
+		if (dragObj == null) {
+			return;
+		}
+
+		var offset = dragObj.offset();
+		offset.left = e.pageX - x;
+		offset.top = e.pageY - y;
+		dragObj.offset(offset);
+	});
+});
+
+</script>

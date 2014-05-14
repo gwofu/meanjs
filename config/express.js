@@ -1,5 +1,7 @@
 'use strict';
 
+
+
 /**
  * Module dependencies.
  */
@@ -15,6 +17,8 @@ var express = require('express'),
 module.exports = function(db) {
 	// Initialize express app
 	var app = express();
+	var server = require('http').createServer(app);
+	var io = require('socket.io').listen(server);
 
 	// Initialize models
 	utilities.walk('./app/models').forEach(function(modelPath) {
@@ -131,5 +135,5 @@ module.exports = function(db) {
 		});
 	});
 
-	return app;
+	return server;
 };

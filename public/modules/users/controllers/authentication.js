@@ -25,7 +25,7 @@ angular.module('mean.users').controller('AuthenticationController', ['$scope', '
                 $scope.authentication.user = response;
 
                 //And redirect to the index page
-                $location.path('/');
+                $location.path('/events/mapview');
             }).error(function(response) {
                 $scope.error = response.message;
             });

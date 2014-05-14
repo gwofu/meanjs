@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('mean.core').controller('HomeController', ['$scope', 'Authentication', 'EventService',
-	function ($scope, Authentication, EventService) {
+angular.module('mean.core').controller('HomeController', ['$scope', 'Authentication', 'EventService', 'SocketioService',
+	function ($scope, Authentication, EventService, SocketioService) {
 		$scope.authentication = Authentication;
 
 		EventService.findAll(function(events) {
@@ -9,6 +9,9 @@ angular.module('mean.core').controller('HomeController', ['$scope', 'Authenticat
 			console.log(events);
 			$scope.events = events;
 		});
+
+		console.log('SocketioService=' + SocketioService);
+		//SocketioService.sentMessage('myroom', 'Hello');
 	}
 ]);
 

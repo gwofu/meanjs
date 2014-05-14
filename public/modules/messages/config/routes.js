@@ -31,7 +31,7 @@ angular.module('mean.messages').config(['$stateProvider',
 			controller: function($scope) {
 				$scope.queryField = 'to';
 			}
-		}).		
+		}).
 		state('viewMessages', {
 			url: '/messages/:messageId',
 			templateUrl: 'modules/messages/views/view.html'

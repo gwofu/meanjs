@@ -4,7 +4,6 @@ angular.module('mean.events')
 .controller('EventsController',
 	['$scope', '$stateParams', '$location', '$filter', 'Authentication', 'Events', 'Addresses', 'Messages', 'MessageService',
 	function($scope, $stateParams, $location, $filter, Authentication, Events, Addresses, Messages, MessageService) {
-		console.log('****** 1 ******');
 
 		$scope.authentication = Authentication;
 		$scope.options = [{
@@ -39,6 +38,7 @@ angular.module('mean.events')
 			value: 'Education'
 		}];
 
+		$scope.showSetting = false;
 		$scope.addresses = [];
 
 		Addresses.search(function(addresses) {
@@ -184,7 +184,7 @@ angular.module('mean.events')
 			console.log('message: ' + message);
 			console.log('reply: ' + reply);
 
-			var message = new Messages({
+			var newMessage = new Messages({
 				to: message.user._id,
 				title: 'Re: ' + message.title,
 				content: reply,
@@ -192,7 +192,7 @@ angular.module('mean.events')
 				event: $scope.event._id
 			});
 			
-			message.$save(function(response) {
+			newMessage.$save(function(response) {
 				$scope.messages.unshift(response);
 			});
 		};
@@ -234,6 +234,10 @@ angular.module('mean.events')
 				console.log('messages=' + JSON.stringify(messages));
 			});
 		};
+
+		$scope.$on('show.setting', function (event, showSettingFlag) {
+			$scope.showSettingFlag = showSettingFlag;
+		});
 
 	}
 ]);

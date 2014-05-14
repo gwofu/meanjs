@@ -96,6 +96,13 @@ angular.module('mean.common')
 		
 		heatmap.setMap(map);
 
+		var showSettingFlag = false;
+
+		scope.showSetting = function() {
+			showSettingFlag = !showSettingFlag;
+			scope.$emit('show.setting', showSettingFlag);
+		};
+
 		scope.disableDefaultUI = function() {
 			map.setOptions ({ disableDefaultUI: true });
 		};
@@ -105,6 +112,10 @@ angular.module('mean.common')
 		};
 
 		scope.showEventLocations = function() {
+			if (scope.events.length == 0) {
+				// show no location found
+				return false;
+			} 
 			var events = scope.events;
 			var loc = events[0].address.loc;
 			var myLatlng = new google.maps.LatLng(loc[0], loc[1]);

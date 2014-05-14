@@ -1,16 +1,10 @@
-<div class="bg"></div>
-<div class="jumbotron">
-	<h1>Messages</h1>
-	<p><h2>List messages.</h2></p>
-</div>
-
 <section class="container" data-ng-controller="MessageController" data-ng-init="find()">
 
 	<div class="row">
 		<div class="col-md-6">
 			<div class="list-group">
-				<div data-ng-repeat="message in messages | orderBy:'date':true">
-					<div ng-switch on="$index == 0 || (message.created.substr(0,10) === messages[$index - 1].created.substr(0,10))">
+				<div data-ng-repeat="message in messages | orderBy:'created':true">
+					<div ng-switch on="$index == 0 || (message.created.substr(0,10) != messages[$index - 1].created.substr(0,10))">
 						<h3 ng-switch-when="true">{{message.created | date:'EEEE, MMM d'}}</h3>
 					</div>
 					<div class="panel panel-danger">

@@ -1,9 +1,3 @@
-<div class="bg"></div>
-<div class="jumbotron">
-	<h1>Events</h1>
-	<p><h2>List events happenging in your neighbor.</h2></p>
-</div>
-
 <section class="container" data-ng-controller="EventsController" data-ng-init="find()">
 
 	<popup popupid="contactPopup" title="Contact member" success-fn="successFn()"><ng-include src="'modules/messages/views/create.html'"></ng-include></popup>
@@ -13,7 +7,7 @@
 	<div class="row">
 		<div class="col-md-6">
 			<div class="list-group">
-				<div data-ng-repeat="event in events | orderBy:'date':true">
+				<div data-ng-repeat="event in events | orderBy:'created':true">
 					<div ng-switch on="$index == 0 || (event.date.substr(0,10) != events[$index - 1].date.substr(0,10))">
 						<h3 ng-switch-when="true" class="date">{{event.date | date:'EEEE, MMM d'}}</h3>
 					</div>
