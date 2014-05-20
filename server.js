@@ -22,8 +22,6 @@ require('./config/passport')();
 // Start the app by listening on <port>
 app.listen(config.port);
 
-var socketServer = require('./lib/socket');
-
 // Expose app
 exports = module.exports = app;
 

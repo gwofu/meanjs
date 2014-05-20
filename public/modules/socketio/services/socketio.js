@@ -4,6 +4,7 @@ angular.module('mean.socketio').service('SocketioService', function() {
 	
 	var socket = io.connect();
 
+	console.log("*****after connect*******");
 
 	this.sendMessage = function(room, text) {
 		var message = {

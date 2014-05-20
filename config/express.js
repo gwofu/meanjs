@@ -1,7 +1,5 @@
 'use strict';
 
-
-
 /**
  * Module dependencies.
  */
@@ -18,7 +16,6 @@ module.exports = function(db) {
 	// Initialize express app
 	var app = express();
 	var server = require('http').createServer(app);
-	var io = require('socket.io').listen(server);
 
 	// Initialize models
 	utilities.walk('./app/models').forEach(function(modelPath) {
@@ -86,13 +83,15 @@ module.exports = function(db) {
 	// cookieParser should be above session
 	app.use(express.cookieParser());
 
+	var sessionStore = new mongoStore({
+			db: db.connection.db,
+			collection: config.sessionCollection
+		});
+
 	// express/mongo session storage
 	app.use(express.session({
 		secret: config.sessionSecret,
-		store: new mongoStore({
-			db: db.connection.db,
-			collection: config.sessionCollection
-		})
+		store: sessionStore
 	}));
 
 	// use passport session
@@ -134,6 +133,9 @@ module.exports = function(db) {
 			error: 'Not Found'
 		});
 	});
+
+	var mySocket = require('../lib/socket');
+	mySocket.listen(server);
 
 	return server;
 };

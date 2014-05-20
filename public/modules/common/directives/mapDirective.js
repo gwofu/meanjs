@@ -22,6 +22,38 @@ angular.module('mean.common')
 		}
 	};
 })
+.directive('announce', function() {
+	return {
+		scope: {
+			message: '='
+		},
+		restrict: 'AE',
+		replace: true,
+		template: '<div id="announceboard">{{message}}</div>',
+		link: function(scope, elem, attrs) {
+			scope.message = '';
+			scope.$on('message', function(event, data) {
+				$(elem).prepend( angular.element('<div>' + data.text + '</div>') );
+			});
+		}
+	};
+})
+.directive('userCount', function() {
+	return {
+		scope: {
+			count: '='
+		},
+		restrict: 'AE',
+		replace: true,
+		template: '<div data-ng-show="count"><span class="badge">{{count}}</span> users online</div>',
+		link: function(scope, elem, attrs) {
+			scope.count = 0;
+			scope.$on('userCount', function(event, data) {
+				scope.count = data.count;
+			});
+		}
+	};
+})
 .directive('googleMap', function() {
 
 	var heatmapPoints = [

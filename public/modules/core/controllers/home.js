@@ -1,17 +1,18 @@
 'use strict';
 
-angular.module('mean.core').controller('HomeController', ['$scope', 'Authentication', 'EventService', 'SocketioService',
-	function ($scope, Authentication, EventService, SocketioService) {
+angular.module('mean.core')
+.controller('HomeController', ['$scope', 'Authentication', 'EventService', 'mySocketService',
+	function ($scope, Authentication, EventService, mySocketService) {
 		$scope.authentication = Authentication;
 
 		EventService.findAll(function(events) {
-			console.log('EventService.findAll');
-			console.log(events);
 			$scope.events = events;
 		});
 
-		console.log('SocketioService=' + SocketioService);
-		//SocketioService.sentMessage('myroom', 'Hello');
+		mySocketService.getUserCount(function(userCount) {
+			$rootScope.$broadcast('userCount', { count: userCount } );
+		});
+
 	}
 ]);
 
