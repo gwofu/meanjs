@@ -128,6 +128,7 @@ module.exports = function(db) {
 
 	// Assume 404 since no middleware responded
 	app.use(function(req, res) {
+		console.log("Server: check req for error");
 		res.status(404).render('404.html', {
 			url: req.originalUrl,
 			error: 'Not Found'

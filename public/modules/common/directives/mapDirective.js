@@ -74,12 +74,19 @@ angular.module('mean.common')
 	var geocoder = new google.maps.Geocoder();
 	var markers = {};
 
-	function setupInfobox(map, marker, event) {
+	/* Key is index */
+	function setupInfobox(scope, map, marker, event, key, appliedFlag) {
+
+		var text = appliedFlag ? ' Applied' : ' Quick Apply';
+		var appliedClass = appliedFlag ? '' : 'scale2';
 
 		var boxText = document.createElement('div');
 		boxText.className = 'panel panel-primary';
-		boxText.innerHTML = '<div class="panel-heading">' + event.title +
-			'</div><div class="panel-body">' + event.content + '</div>';
+		boxText.innerHTML = '<div class="panel-heading">' + event.user.displayName + ': ' + event.title +
+			'</div><div class="panel-body">' + event.content + '</div>' +
+			'<table class="table"><tr><td class="' + appliedClass + ' applyPosition' + key + '"><span class="glyphicon glyphicon-ok">' +
+			'</span><span>' + text + '</span></td><td class="scale2">' +
+			'<span class="glyphicon glyphicon-eye-open"></span><span> Watch</span></td><tr></table>';
 
 		var myOptions = {
 			content: boxText
@@ -89,7 +96,7 @@ angular.module('mean.common')
 			,zIndex: null
 			,boxStyle: {
 				//background: 'url("tipbox.gif") no-repeat',
-				opacity: 1,
+				opacity: 0.9,
 				width: '400px'
 			}
 			,closeBoxMargin: '2px 2px 2px 2px'
@@ -110,7 +117,19 @@ angular.module('mean.common')
 				ib.open(map, this);
 			}
 		});
-
+		google.maps.event.addListener(ib, 'domready', function() {
+			if (!appliedFlag) {
+				var className = '.applyPosition' + key;
+				$(className).on('click', function(e) {
+					appliedFlag = true;
+					scope.applyPosition(event, function() {
+						$(className).removeClass('scale2').attr('disabled', true);
+						$(className + ' > span:last').text(' Applied');
+					});
+					$(this).off(e);
+				});
+			}
+		});
 	}
 
 	function postLink(scope, element, attrs, ctrl) {
@@ -120,7 +139,7 @@ angular.module('mean.common')
 
 		var mapOptions = {
 			//center: new google.maps.LatLng(41.8781136, -87.62979819999998),
-			zoom: 12
+			zoom: 13
 		};
 
 		map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
@@ -147,7 +166,8 @@ angular.module('mean.common')
 			if (scope.events.length == 0) {
 				// show no location found
 				return false;
-			} 
+			}
+
 			var events = scope.events;
 			var loc = events[0].address.loc;
 			var myLatlng = new google.maps.LatLng(loc[0], loc[1]);
@@ -155,7 +175,7 @@ angular.module('mean.common')
 			
 			var bounds = new google.maps.LatLngBounds();
 
-			angular.forEach(events, function(event) {
+			angular.forEach(events, function(event, index) {
 				loc = event.address.loc;
 				myLatlng = new google.maps.LatLng(loc[0], loc[1]);
 				bounds.extend(myLatlng);
@@ -167,12 +187,16 @@ angular.module('mean.common')
 					title: event.title,
 				});
 
+				var appliedFlag = scope.appliedEvents.indexOf(event._id) > -1;
+
 				markers[event._id] = marker;
-				setupInfobox(map, marker, event);
+				setupInfobox(scope, map, marker, event, index, appliedFlag);
 			});
 
-			map.fitBounds (bounds);
-			map2.fitBounds (bounds);
+			if (events.length > 1) {
+				map.fitBounds (bounds);
+				//map2.fitBounds (bounds);
+			}
 
 			//Listening center_changed event of map 1 to
 			//change center of map 2

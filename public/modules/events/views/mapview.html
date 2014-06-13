@@ -1,4 +1,4 @@
-<div class="overlap" id="eventsController" ng-controller="EventsController" data-ng-init="find()">
+<div class="overlap" id="eventsController" ng-controller="EventsController" data-ng-init="find(); findAppliedEvents()">
 	<div class="row">
 		<div id="mapmenu" class="col-md-3" ng-show="showSettingFlag">
 			<div class="panel-group" id="accordion">
@@ -135,6 +135,7 @@ $(function() {
 		offset.top = e.pageY - y;
 		dragObj.offset(offset);
 	});
+
 });
 
 </script>

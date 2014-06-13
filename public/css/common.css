@@ -111,6 +111,70 @@ google-map {
 	background-color: #af3b29;
 	color: white;
 	overflow-y: scroll;
+	overflow-x: hidden;
+	/*
+	transition-property: left;
+	transition-duration: 2s;
+	*/
 }
+input[type=checkbox] {
+	position: absolute;
+	top: -9999px;
+	left: -9999px;
+}
+input[type=checkbox]:checked ~ #footer {
+	left: -100%;
+	animation: hide 2s;
+	-webkit-animation: hide 2s
+}
+
+#toggle + label {
+	position: fixed;
+	bottom: 0px;
+	height: 80px;
+	display: inline-block;
+	background: #08C;
+	padding: 2px;
+	margin: 0;
+	border: 1px solid rgba(0,0,0,.1);
+	border-radius: 2px;
+	color: white;
+	font-weight: bold;
+	z-index: 999;
+}
+input[type=checkbox]:not(:checked)  + label:before {
+	content: "\f053";
+	font-family: FontAwesome;
+	position: relative;
+	top: 35%;
+}
+input[type=checkbox]:checked + label:before {
+	content: "\f054";
+	font-family: FontAwesome;
+	position: relative;
+	top: 35%;
+}
+
+@-webkit-keyframes hide {
+	from {left:0px;}
+	to {left:-100%;}
+}
+@keyframes hide
+{
+	from {left:0px;}
+	to {left:-100%;}
+}
+
 #announceboard {
+}
+
+.scale2 {
+	cursor:pointer;
+	-webkit-transition: background-color 500ms ease-out;
+	-moz-transition: background-color 500ms ease-out;
+	-o-transition: background-color 500ms ease-out;
+	transition: background-color 500ms ease-out;
+}
+.scale2:hover {
+	background-color:yellow;
 }

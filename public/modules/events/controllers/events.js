@@ -2,8 +2,8 @@
 
 angular.module('mean.events')
 .controller('EventsController',
-	['$scope', '$stateParams', '$location', '$filter', 'Authentication', 'Events', 'Addresses', 'Messages', 'MessageService',
-	function($scope, $stateParams, $location, $filter, Authentication, Events, Addresses, Messages, MessageService) {
+	['$scope', '$stateParams', '$location', '$filter', 'Authentication', 'Events', 'Addresses', 'Messages', 'MessageService', 'AppliedEventsService',
+	function($scope, $stateParams, $location, $filter, Authentication, Events, Addresses, Messages, MessageService, AppliedEventsService) {
 
 		$scope.authentication = Authentication;
 		$scope.options = [{
@@ -40,6 +40,7 @@ angular.module('mean.events')
 
 		$scope.showSetting = false;
 		$scope.addresses = [];
+		$scope.appliedEvents = [];
 
 		Addresses.search(function(addresses) {
 			if (addresses) {
@@ -239,5 +240,25 @@ angular.module('mean.events')
 			$scope.showSettingFlag = showSettingFlag;
 		});
 
+		$scope.applyPosition = function(event, callback) {
+			AppliedEventsService.create({
+				user: event.user._id,
+				event: event._id
+			}, function(response) {
+				callback();
+				//$scope.$broadcast('applied.event.end', response);
+			});
+		};
+
+		$scope.findAppliedEvents = function() {
+			console.log("findAppliedEvents");
+			AppliedEventsService.findByUser(function(data) {
+				console.log("my applied events=" + JSON.stringify(data));
+				data.forEach(function(element, index) {
+					$scope.appliedEvents.push(element.event);
+				});
+				console.log("$scope.appliedEvents=" + $scope.appliedEvents);
+			});
+		};
 	}
 ]);

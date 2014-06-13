@@ -74,7 +74,7 @@ exports.delete = function(req, res) {
  * List of messages
  */
 exports.list = function(req, res) {
-	console.log('==============list==============');
+	console.log('==============message list==============');
 	console.log('req.user.id=' + req.user.id);
 	console.log('req.query.action=' + req.query.action);
 	console.log('req.query.eventId=' + req.query.eventId);

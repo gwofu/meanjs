@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('mean.core')
-.controller('HomeController', ['$scope', 'Authentication', 'EventService', 'mySocketService',
-	function ($scope, Authentication, EventService, mySocketService) {
+.controller('HomeController', ['$rootScope', '$scope', 'Authentication', 'EventService', 'mySocketService',
+	function ($rootScope, $scope, Authentication, EventService, mySocketService) {
 		$scope.authentication = Authentication;
 
 		EventService.findAll(function(events) {

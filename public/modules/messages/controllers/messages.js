@@ -6,7 +6,7 @@ angular.module('mean.messages')
 	function($scope, $stateParams, $location, $filter, Authentication, Messages) {
 
 		$scope.authentication = Authentication;
-
+/*
 		$scope.create = function() {
 
 			var message = new Messages({
@@ -25,7 +25,7 @@ angular.module('mean.messages')
 			this.content = '';
 			this.type = '';
 		};
-
+*/
 		$scope.remove = function(message) {
 			if (message) {
 				message.$remove();

@@ -8,8 +8,8 @@ module.exports = {
 		title: '-`♥´- development'
 	},
 	facebook: {
-		clientID: 'APP_ID',
-		clientSecret: 'APP_SECRET',
+		clientID: '240618009471705',
+		clientSecret: 'd74445e4d155c7850ec743d327ab33cb',
 		callbackURL: 'http://localhost:3000/auth/facebook/callback'
 	},
 	twitter: {
