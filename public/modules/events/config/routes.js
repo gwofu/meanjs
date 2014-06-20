@@ -24,7 +24,14 @@ angular.module('mean.events').config(['$stateProvider',
 		}).
 		state('eventsByUser', {
 			url: '/events/listByUser',
-			templateUrl: 'modules/events/views/list.html',
+			templateUrl: 'modules/events/views/mylist.html',
+			controller: function($scope) {
+				$scope.queryByUser = true;
+			}
+		}).
+		state('appliedEvent', {
+			url: '/events/appliedEvents',
+			templateUrl: 'modules/events/views/appliedEvents.html',
 			controller: function($scope) {
 				$scope.queryByUser = true;
 			}

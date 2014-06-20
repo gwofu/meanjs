@@ -7,4 +7,8 @@ module.exports = function(app) {
 	// Routes
 	app.post('/appliedEvents', users.requiresLogin, appliedEvent.create);
 	app.get('/appliedEvents', users.requiresLogin, appliedEvent.list);
+	app.del('/appliedEvents/:appliedEventId', users.requiresLogin, appliedEvent.delete);
+
+	// Finish by binding the event middleware
+	app.param('appliedEventId', appliedEvent.eventByID);
 };

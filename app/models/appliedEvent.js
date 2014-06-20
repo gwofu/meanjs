@@ -19,9 +19,9 @@ var AppliedEventSchema = new Schema({
 });
 
 AppliedEventSchema.statics = {
-	load: function(userid, cb) {
-		this.find({
-			user: userid
+	load: function(appliedEventId, cb) {
+		this.findOne({
+			_id: appliedEventId
 		}).exec(cb);
 	}
 };

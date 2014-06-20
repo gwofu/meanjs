@@ -8,6 +8,12 @@ angular.module('mean.events').factory('Events', ['$resource', function($resource
 		update: {
 			method: 'PUT'
 		},
+		addMember: {
+			method: 'PUT',
+			params: {
+				action: 'addMember'
+			}
+		},
 		findByUser: {
 			method: 'GET',
 			params: {
@@ -28,12 +34,15 @@ angular.module('mean.events').factory('Events', ['$resource', function($resource
 angular.module('mean.events').service('EventService', function(Events) {
 
 	this.findByUser = function(callback) {
+		alert("findByUser");
 		Events.findByUser(function(data) {
 			callback(data);
 		});
 	};
 
 	this.findById = function(id, callback) {
+		alert("findById");
+		
 		Events.get({
 			eventId: id
 		}, function(data) {

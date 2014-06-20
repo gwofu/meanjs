@@ -174,6 +174,7 @@ angular.module('mean.common')
 			map.setCenter(myLatlng);
 			
 			var bounds = new google.maps.LatLngBounds();
+			console.log("***scope.appliedEvents=" + scope.appliedEvents);
 
 			angular.forEach(events, function(event, index) {
 				loc = event.address.loc;
@@ -186,7 +187,8 @@ angular.module('mean.common')
 					icon: 'img/animals/bear.png',
 					title: event.title,
 				});
-
+				console.log("event._id=" + event._id);
+				console.log("scope.appliedEvents.indexOf(event._id)=" + scope.appliedEvents.indexOf(event._id));
 				var appliedFlag = scope.appliedEvents.indexOf(event._id) > -1;
 
 				markers[event._id] = marker;

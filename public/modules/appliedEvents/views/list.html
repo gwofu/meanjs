@@ -1,0 +1,50 @@
+<section class="container" data-ng-controller="AppliedEventsController" data-ng-init="find()">
+	<div class="page-header">
+  	<h3>Total {{ events.length }} event(s) applied<h3>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<div class="list-group">
+				<div data-ng-repeat="event in events">
+					<div>{{event.created | date:'medium'}} applied</div>
+					<div class="panel panel-primary">
+						<div class="panel-heading">
+							<span style="display:inline-block;width:80%"><label class='label label-info'>{{event.event.type}}</label> {{event.event.title}}</span>
+							<span class="pull-right">
+								<a class="btn btn-warning btn-xs" data-ng-click="deleteAppliedEvent(event._id)"><span class="glyphicon glyphicon-remove"></span></a>
+							</span>
+						</div>
+						<div class="panel-body">
+							{{event.event.content}}
+						</div>
+						<div class="panel-footer" style="padding: 0px">
+							<small>
+							<table class="table table-bordered table-condensed" style="margin: 0">
+								<tr>
+									<td>Owner</td>
+									<td>Place</td>
+									<td>Date</td>
+									<td>Time</td>
+								</tr>
+								<tr>
+									<td>{{event.user.displayName}}</td>
+									<td>{{event.event.address.displayName}}</td>
+									<td>{{event.event.date | date:'EEEE, MMM d'}}</td>
+									<td>{{event.event.date | date:'hh:mm a'}}</td>
+								</tr>
+							</table>
+							</small>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="alert alert-warning text-center" data-ng-hide="!events || events.length">
+				No event appled yet.
+			</div>
+		</div>
+	</div>
+
+</section>
+
+
+

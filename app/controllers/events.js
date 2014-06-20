@@ -38,6 +38,12 @@ exports.read = function(req, res) {
 exports.update = function(req, res) {
 	var event = req.event;
 
+console.log("update------------");
+console.log("req.query.action=" + req.query.action);
+console.log("req.body=" + req.body);
+	if (req.query.action && req.query.action === 'addMember') {
+
+	}
 	event = _.extend(event, req.body);
 
 	event.save(function(err) {
@@ -72,7 +78,7 @@ exports.delete = function(req, res) {
  * List of Events
  */
 exports.list = function(req, res) {
-	console.log('------------ list ------------------');
+	console.log('------------ event list ------------------');
 
 	var query = {};
 
@@ -85,7 +91,7 @@ exports.list = function(req, res) {
 		query = {'address.city': req.query.city, 'address.state': req.query.state};
 	}
 
-	Event.find(query).sort('-created').populate('user', 'displayName').exec(function(err, events) {
+	Event.find(query).sort('-date').populate('user', 'displayName').exec(function(err, events) {
 		if (err) {
 			res.render('error', {
 				status: 500
@@ -100,16 +106,13 @@ exports.list = function(req, res) {
  * Event middleware
  */
 exports.eventByID = function(req, res, next, id) {
+	console.log('------------ eventByID ------------------');
 	Event.load(id, function(err, event) {
 		if (err) return next(err);
 		if (!event) return next(new Error('Failed to load event ' + id));
 		req.event = event;
 		next();
 	});
-};
-
-exports.findByCityState = function(req, res, next) {
-	console.log('------------ findByCityState ------------------');
 };
 
 /**

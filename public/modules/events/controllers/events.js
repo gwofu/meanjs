@@ -126,7 +126,6 @@ angular.module('mean.events')
 		};
 
 		$scope.find = function() {
-			console.log('==============find================');
 			if ($scope.queryByUser) {
 				Events.findByUser(function(events) {
 					$scope.events = events;
@@ -173,18 +172,13 @@ angular.module('mean.events')
 
 		$scope.inboxMessages = function(event) {
 			$scope.event = event;
-			console.log('event=' + JSON.stringify($scope.event));
 
 			MessageService.findByEventId($scope.event._id, function(messages) {
 				$scope.messages = messages;
-				console.log('messages=' + JSON.stringify(messages));
 			});
 		};
 
 		$scope.replyMessage = function(message, reply) {
-			console.log('message: ' + message);
-			console.log('reply: ' + reply);
-
 			var newMessage = new Messages({
 				to: message.user._id,
 				title: 'Re: ' + message.title,
@@ -199,7 +193,7 @@ angular.module('mean.events')
 		};
 
 		$scope.successFn = function() {
-			console.log('$scope.event._id: ' + $scope.event._id);
+			//console.log('$scope.event._id: ' + $scope.event._id);
 			var title = $('.messageCreate > input').val();
 			var content = $('.messageCreate > textarea').val();
 
@@ -224,7 +218,7 @@ angular.module('mean.events')
 		$scope.findMessagesByEvent = function() {
 			console.log('findByEventId called');
 			if (!$scope.event) {
-				console.log('event is not selected');
+				//console.log('event is not selected');
 				return;
 			}
 
@@ -232,7 +226,6 @@ angular.module('mean.events')
 
 			MessageService.findByEventId($scope.event._id, function(messages) {
 				$scope.messages = messages;
-				console.log('messages=' + JSON.stringify(messages));
 			});
 		};
 
@@ -251,14 +244,65 @@ angular.module('mean.events')
 		};
 
 		$scope.findAppliedEvents = function() {
-			console.log("findAppliedEvents");
-			AppliedEventsService.findByUser(function(data) {
-				console.log("my applied events=" + JSON.stringify(data));
+			AppliedEventsService.getEventId(function(data) {
+				$scope.appliedEvents = [];
 				data.forEach(function(element, index) {
 					$scope.appliedEvents.push(element.event);
 				});
-				console.log("$scope.appliedEvents=" + $scope.appliedEvents);
+				//console.log("$scope.appliedEvents=" + $scope.appliedEvents);
 			});
 		};
+
+		$scope.getUsersApplied = function(eventId, members, status) {
+			AppliedEventsService.findByEventId(eventId, function(data) {
+				angular.forEach(data, function(obj, index) {
+					console.log("--------------");
+					console.log(members.indexOf(obj.user._id));
+					if (members.indexOf(obj.user._id) > -1) {
+						data[index].selected = true;
+					} else {
+						data[index].selected = false;
+					}
+				});
+				$scope.usersApplied = data;
+				$scope.eventId = eventId;
+				$scope.openFlag = status == 'o';
+			});
+		};
+
+		$scope.updateMember = function() {
+			$scope.saveFlag = true;
+			var children = angular.element( document.querySelectorAll( '.selectUser > a > i.fa-check-square-o' ) );
+			var users = [];
+
+			for (var i=0; i<children.length; i++) {
+				users.push(children[i].getAttribute('userid'));
+			}
+
+			var event = new Events({
+				_id: $scope.eventId,
+				members: users
+			});
+
+			event.$addMember({}, function(response){
+				$scope.saveFlag = false;
+			});
+		};
+
+		$scope.closeRegistration = function(eventId) {
+
+			
+			var event = new Events({
+				_id: eventId,
+				status: 'c'
+			});
+
+			event.$update({}, function(response){
+				$scope.find();
+
+			});
+		};
+
+
 	}
 ]);

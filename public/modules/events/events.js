@@ -24,6 +24,10 @@ angular.module('mean.core')
 					link: 'events/listByUser',
 					uiRoute: '/events/listByUser'
 				}, {
+					title: 'Applied Events',
+					link: 'appliedEvents',
+					uiRoute: '/appliedEvents'
+				}, {
 					title: 'Map Event',
 					link: 'events/mapview',
 					uiRoute: '/events/mapview'
