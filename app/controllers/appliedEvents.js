@@ -30,6 +30,23 @@ exports.read = function(req, res) {
 	res.jsonp(req.query);
 };
 
+exports.findByEventAndUser = function(req, res) {
+	console.log('==============findByEventAndUser==============');
+	console.log('req.body.eventId=' + req.query.eventId);
+	var query = {user: req.user.id, event: req.query.eventId};
+	AppliedEvent.findOne(query).exec(function(err, data) {
+		if (err) {
+			console.log('err=' + err);
+			res.render('error', {
+				status: 500
+			});
+		} else {
+			console.log(data);
+			res.jsonp(data);
+		}
+	});
+};
+
 /**
  * List of appliedEvent
  */

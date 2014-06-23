@@ -14,7 +14,7 @@ var EventSchema = base.makeSchema({
 		type: { type: String, trim: true }, // event type
 		date: { type: Date }, // event start date
 		enddate: { type: Date }, // event end date
-		status: { type: String, trim: true, default: 'o' }, // event status
+		status: { type: String, enum: ['o','c','a','e'], default: 'o' }, // event status
 		address: { // event place
 			_id: { type: String, trim: true },
 			city: { type: String, trim: true },

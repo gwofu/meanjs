@@ -29,8 +29,6 @@ exports.create = function(req, res) {
  * Show the current message
  */
 exports.read = function(req, res) {
-	console.log('=========haha=====read==============');
-
 	res.jsonp(req.message);
 };
 
@@ -74,11 +72,6 @@ exports.delete = function(req, res) {
  * List of messages
  */
 exports.list = function(req, res) {
-	console.log('==============message list==============');
-	console.log('req.user.id=' + req.user.id);
-	console.log('req.query.action=' + req.query.action);
-	console.log('req.query.eventId=' + req.query.eventId);
-	console.log('req.query.to=' + req.query.to);
 	var query = {};
 
 	if (req.query.action && req.query.action === 'listByUser') {
@@ -94,7 +87,6 @@ exports.list = function(req, res) {
 	.populate('to', 'displayName')
 	.exec(function(err, messages) {
 		if (err) {
-			console.log('err=' + err);
 			res.render('error', {
 				status: 500
 			});
@@ -108,7 +100,6 @@ exports.list = function(req, res) {
  * Message middleware
  */
 exports.messageByID = function(req, res, next, id) {
-	console.log('=========haha=====messageByID==============');
 	Message.load(id, function(err, message) {
 		if (err) return next(err);
 		if (!message) return next(new Error('Failed to load message ' + id));

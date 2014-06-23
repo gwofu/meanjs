@@ -44,6 +44,10 @@ angular.module('mean.events').config(['$stateProvider',
 			url: '/events/:eventId',
 			templateUrl: 'modules/events/views/view.html'
 		}).
+		state('detailEvent', {
+			url: '/events/:eventId/detail',
+			templateUrl: 'modules/events/views/detail.html'
+		}).
 		state('editEvent', {
 			url: '/events/:eventId/edit',
 			templateUrl: 'modules/events/views/edit.html'

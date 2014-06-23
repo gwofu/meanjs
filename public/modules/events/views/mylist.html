@@ -15,7 +15,10 @@
 					</h4>
 					<div class="panel panel-primary">
 						<div class="panel-heading">
-							<span style="display:inline-block;width:80%"><label class='label label-info'>{{event.type}}</label> {{event.title}}</span>
+							<span style="display:inline-block;width:80%">
+								<div class='label label-info'>{{event.type}}</div><br><br>
+								<div>{{event.title}}</div>
+							</span>
 							<span class="pull-right">
 
 								<ng-switch on="event.status">
@@ -26,6 +29,9 @@
 								<a class="btn btn-warning btn-xs" data-ng-click="getUsersApplied(event._id, event.members, event.status)" title="User applied"><i class="fa fa-user"></i></a>
 
 								<a class="btn btn-warning btn-xs" data-toggle="modal" data-target="#inboxPopup" data-ng-click="inboxMessages(event)" title="Messages"><span class="glyphicon glyphicon-envelope"></span></a>
+
+								<a class="btn btn-warning btn-xs" data-ng-click="remove(event)" title="Delete event"><span class="glyphicon glyphicon-remove"></span></a>
+
 							</span>
 						</div>
 						<div class="panel-body">

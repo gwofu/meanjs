@@ -54,6 +54,45 @@ angular.module('mean.common')
 		}
 	};
 })
+.directive('smallMap', function() {
+
+	var map;
+	
+	function postLink(scope, element, attrs, ctrl) {
+
+		var mapOptions = {
+			zoom: 13,
+		};
+
+		scope.$on('load.event.end', function (event, loc) {
+			scope.showEventLocations(loc);
+
+			google.maps.event.addListener(map, 'click', function() {
+				window.open("http://maps.google.com/maps?q=" + loc[0] + "," + loc[1]);
+			});
+
+		});
+
+		map = new google.maps.Map(document.getElementById('small-map-canvas'), mapOptions);
+
+		scope.showEventLocations = function(loc) {
+			var myLatlng = new google.maps.LatLng(loc[0], loc[1]);
+			map.setCenter(myLatlng);
+
+			var marker = new google.maps.Marker({
+				map: map,
+				position: map.getCenter()
+			});
+
+		}
+	}
+
+	return {
+		restrict: 'E',
+		template: '<div id="small-map-canvas"/>',
+		link: postLink
+	};
+})
 .directive('googleMap', function() {
 
 	var heatmapPoints = [

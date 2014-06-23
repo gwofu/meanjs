@@ -1,0 +1,59 @@
+<section data-ng-controller="EventsController" data-ng-init="findOne()">
+
+<popup popupid="contactPopup" title="Comment" success-fn="simpleCreateSuccessFn()"><ng-include src="'modules/messages/views/simpleCreate.html'"></ng-include></popup>
+
+<div class="row">
+	<div class="col-md-3">
+		<h1 style="display:inline-block">Comments</h1>&nbsp;&nbsp;<button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#contactPopup" data-ng-click="selectedEvent(event)"><small>Add Comment</small></button>
+		<ng-include src="'modules/messages/views/simpleList.html'">
+	</div>
+	<div class="col-md-9">
+		<h1>{{event.title}}</h1>
+		<div class="panel panel-default shadow">
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<em class="text-muted">Posted on {{event.created | date:'mediumDate'}} by {{event.user.displayName}}</em>
+				</h3>
+			</div>
+			<div class="panel-body">
+					<div class="row">
+						<div class="col-md-7">
+							<div class="contentLarge">
+								{{event.content}}
+							</div>
+							<br><br>
+							<ng-switch on="event.appliedFlag">
+								<button ng-switch-when="true" type="button" class="btn btn-info btn-lg" disabled>You are a member of this event now!</button>
+								<button ng-switch-default type="button" class="btn btn-info btn-lg" data-ng-click="detailApplyPosition($event)">I want to help!</button>
+							</ng-switch>
+						</div>
+						<div class="col-md-5"><small-map pos="event.address.locs"></small-map></div>
+					</div>
+					<hr>
+					<div class="row">
+						<small>
+							<div class="col-md-4">
+								<div class="thumbnail">
+									{{event.type}}
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="thumbnail">
+									<div>When</div>
+									<div><i class="fa fa-calendar fa-2x"></i> {{event.date}}</div>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="thumbnail">
+									<div>Place</div>
+									<div><i class="fa fa-map-marker fa-2x"></i> {{event.address.displayName}}</div>
+								</div>
+							</div>
+						</small>
+					</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+</section>

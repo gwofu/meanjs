@@ -9,7 +9,10 @@
 					<div>{{event.created | date:'medium'}} applied</div>
 					<div class="panel panel-primary">
 						<div class="panel-heading">
-							<span style="display:inline-block;width:80%"><label class='label label-info'>{{event.event.type}}</label> {{event.event.title}}</span>
+							<span style="display:inline-block;width:80%">
+								<div class='label label-info'>{{event.event.type}}</div><br><br>
+								<div>{{event.event.title}}</div>
+							</span>
 							<span class="pull-right">
 								<a class="btn btn-warning btn-xs" data-ng-click="deleteAppliedEvent(event._id)"><span class="glyphicon glyphicon-remove"></span></a>
 							</span>

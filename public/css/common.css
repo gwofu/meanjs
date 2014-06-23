@@ -26,6 +26,12 @@ body {
 #map-canvas { 
 	height: 450px;
 }
+#small-map-canvas {
+	height: 200px;
+	margin: 0px;
+	padding: 0px
+}
+
 .infobox {
 	border:2px solid black;
 	margin-top: 8px;
@@ -72,7 +78,7 @@ body {
 	text-shadow: #444 0 1px 1px;
 	background: transparent;
 }
-.panel {
+.shadow {
 	box-shadow: 10px 10px 20px gray;	
 }
 h3.date {
@@ -177,4 +183,18 @@ input[type=checkbox]:checked + label:before {
 }
 .scale2:hover {
 	background-color:yellow;
+}
+
+.contentLarge {
+	color: #ff6344;
+	font-family: 'Josefin Slab','Josefin Sans',Cabin,'Trebuchet MS',Arial,sans-serif!important;
+	font-size: 26px;
+	font-weight: 600;
+	line-height: 1.2;
+	margin-top: 20px;
+}
+
+.disable {
+	pointer-events: none;
+	cursor: default;
 }

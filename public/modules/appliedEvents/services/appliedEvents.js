@@ -19,6 +19,13 @@ angular.module('mean.appliedEvents').factory('AppliedEvents', ['$resource', func
 			},
 			isArray: true
 		},
+		findByEventAndUser: {
+			method: 'GET',
+			params: {
+				eventId: 'eventId'
+			},
+			url: 'appliedEvents/findByEventAndUser'
+		},
 		deleteById: {
 			method: 'DELETE'
 		}
@@ -65,4 +72,11 @@ angular.module('mean.appliedEvents').service('AppliedEventsService', function(Ap
 		});
 	};
 
+	this.findByEventAndUser = function(eventId, callback) {
+		AppliedEvents.findByEventAndUser({
+			eventId: eventId
+		},function(data) {
+			callback(data);
+		});
+	}
 });

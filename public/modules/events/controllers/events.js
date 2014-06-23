@@ -108,6 +108,10 @@ angular.module('mean.events')
 			}
 		};
 
+		$scope.openDetailPage = function(eventId) {
+			$location.path('events/' + eventId +'/detail');
+		};
+
 		$scope.update = function() {
 			var event = $scope.event;
 			if (!event.updated) {
@@ -144,6 +148,16 @@ angular.module('mean.events')
 				eventId: $stateParams.eventId
 			}, function(event) {
 				$scope.event = event;
+
+				AppliedEventsService.findByEventAndUser(event._id, function(response) {
+					console.log("response =" + JSON.stringify(response.event));
+					$scope.event.appliedFlag = response.event ? true : false;
+				});
+
+				$scope.$broadcast('load.event.end', $scope.event.address.loc);
+
+				$scope.inboxMessages();
+
 			});
 		};
 
@@ -170,8 +184,9 @@ angular.module('mean.events')
 			$scope.event = event;
 		};
 
-		$scope.inboxMessages = function(event) {
-			$scope.event = event;
+		$scope.inboxMessages = function() {
+			console.log($scope.event);
+			//$scope.event = event;
 
 			MessageService.findByEventId($scope.event._id, function(messages) {
 				$scope.messages = messages;
@@ -192,6 +207,7 @@ angular.module('mean.events')
 			});
 		};
 
+
 		$scope.successFn = function() {
 			//console.log('$scope.event._id: ' + $scope.event._id);
 			var title = $('.messageCreate > input').val();
@@ -207,6 +223,23 @@ angular.module('mean.events')
 			
 			message.$save(function(response) {
 				//console.log('Response: ' + response)
+			});
+			
+		};
+
+		$scope.simpleCreateSuccessFn = function() {
+			var content = $('.messageCreate > textarea').val();
+
+			var message = new Messages({
+				to: $scope.event.user._id,
+				content: content,
+				event: $scope.event._id
+			});
+			
+			message.$save(function(response) {
+				MessageService.findByEventId($scope.event._id, function(messages) {
+					$scope.messages = messages;
+				});
 			});
 			
 		};
@@ -233,12 +266,27 @@ angular.module('mean.events')
 			$scope.showSettingFlag = showSettingFlag;
 		});
 
-		$scope.applyPosition = function(event, callback) {
+		$scope.detailApplyPosition = function($event) {
 			AppliedEventsService.create({
-				user: event.user._id,
-				event: event._id
+				user: $scope.event.user._id,
+				event: $scope.event._id
 			}, function(response) {
-				callback();
+				var e = $event.target;
+				angular.element(e).text('Applied!');
+				angular.element(e).prop('disabled', true);
+
+			});
+		}
+
+		$scope.applyPosition = function(event, callback) {
+			var e = event ? event : $scope.event;
+			var c = callback ? callback : function(){};
+
+			AppliedEventsService.create({
+				user: e.user._id,
+				event: e._id
+			}, function(response) {
+				c();
 				//$scope.$broadcast('applied.event.end', response);
 			});
 		};

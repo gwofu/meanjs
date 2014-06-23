@@ -43,8 +43,6 @@ angular.module('mean.messages')
 		};
 
 		$scope.find = function() {
-			console.log('==============find================');
-			console.log('$scope.queryByUser=' + $scope.queryByUser);
 			if ($scope.queryByUser) {
 				Messages.findByUser(function(messages) {
 					$scope.messages = messages;

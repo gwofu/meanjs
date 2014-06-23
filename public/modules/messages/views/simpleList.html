@@ -1,0 +1,25 @@
+<section data-ng-controller="EventsController">
+
+	<div class="list-group">
+	<small>
+		<div data-ng-repeat="message in messages | orderBy:'created':true">
+			<div class="panel panel-danger">
+				<div class="panel-heading">
+					{{message.user.displayName}}
+				</div>
+				<div class="panel-body">
+					{{message.content}}
+				</div>
+				<div class="panel-footer"><i class="fa fa-clock-o"></i> {{message.created | date:'medium'}}
+				</div>
+			</div>
+		</div>
+	</div>
+	<small>
+	<div class="alert alert-warning text-center" data-ng-hide="!messages || messages.length">
+		No Comment
+	</div>
+
+</section>
+
+

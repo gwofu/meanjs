@@ -15,19 +15,18 @@
 					</h4>
 					<div class="panel panel-primary">
 						<div class="panel-heading">
-							<span style="display:inline-block;width:80%"><label class='label label-info'>{{event.type}}</label> {{event.title}}</span>
+							<span style="display:inline-block;width:80%">
+								<div class='label label-info'>{{event.type}}</div><br><br>
+								<div>{{event.title}}</div>
+							</span>
 							<span class="pull-right">
-								<button type="button" data-ng-hide="queryByUser" class="btn btn-info btn-xs" title="Open detail page" data-ng-click="openDetailPage(event)"><i class="fa fa-folder-open-o fa-2x"></i></button>
-
-								<a data-ng-hide="queryByUser" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#contactPopup" data-ng-click="selectedEvent(event)"><span class="glyphicon glyphicon-phone-alt"></span></a>
-
-								<a class="btn btn-warning btn-xs" data-toggle="modal" data-target="#inboxPopup" data-ng-click="inboxMessages(event)"><span class="glyphicon glyphicon-envelope"></span></a>
+								<button type="button" data-ng-hide="queryByUser" class="btn btn-primary btn-xs" title="Open detail page" data-ng-click="openDetailPage(event._id)"><i class="fa fa-folder-open-o fa-2x"></i></button>
 							</span>
 						</div>
 						<div class="panel-body">
 							{{event.content}}
 						</div>
-						<div class="panel-footer"><i class="fa fa-map-marker"></i><small> {{event.address.displayName}}<br/>{{event.user.displayName}}</small>
+						<div class="panel-footer"><i class="fa fa-map-marker"></i><small> {{event.address.displayName}}</small>
 						</div>
 					</div>
 				</div>

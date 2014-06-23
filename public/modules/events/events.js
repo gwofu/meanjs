@@ -12,7 +12,7 @@ angular.module('mean.core')
 			scope.menu.push({
 				name: 'Event',
 				items: [{
-					title: 'Events',
+					title: 'Show All Events',
 					link: 'events',
 					uiRoute: '/events'
 				}, {
