@@ -1,6 +1,7 @@
-angular.module('mean.socketio').service('SocketioService', function() {
+angular.module('mean.socketio').service('SocketioService', function($scope) {
 
 	console.log("*****SocketioService*******");
+	$scope.showFooter = false;
 	
 	var socket = io.connect();
 

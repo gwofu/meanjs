@@ -55,8 +55,6 @@ angular.module('mean.appliedEvents').service('AppliedEventsService', function(Ap
 	};
 
 	this.deleteById = function(appliedEventId, callback) {
-		console.log("deleteById");
-		console.log("appliedEventId=" + appliedEventId);
 		AppliedEvents.deleteById({
 			appliedEventId: appliedEventId
 		}, function(data) {

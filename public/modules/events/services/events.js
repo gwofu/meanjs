@@ -27,6 +27,21 @@ angular.module('mean.events').factory('Events', ['$resource', function($resource
 				action: 'findByCityState'
 			},
 			isArray: true
+		},
+		findOpenEvents: {
+			method: 'GET',
+			url: 'events/findOpenEvents',
+			isArray: true
+		},
+		findCurrentEvents: {
+			method: 'GET',
+			url: 'events/findCurrentEvents',
+			isArray: true
+		},
+		findPastEvents: {
+			method: 'GET',
+			url: 'events/findPastEvents',
+			isArray: true
 		}
 	});
 }]);

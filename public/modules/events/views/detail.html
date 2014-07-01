@@ -23,7 +23,7 @@
 							</div>
 							<br><br>
 							<ng-switch on="event.appliedFlag">
-								<button ng-switch-when="true" type="button" class="btn btn-info btn-lg" disabled>You are a member of this event now!</button>
+								<button ng-switch-when="true" type="button" class="btn btn-info btn-lg" disabled>You are a member of this event!</button>
 								<button ng-switch-default type="button" class="btn btn-info btn-lg" data-ng-click="detailApplyPosition($event)">I want to help!</button>
 							</ng-switch>
 						</div>
@@ -34,19 +34,20 @@
 						<small>
 							<div class="col-md-4">
 								<div class="thumbnail">
+									<div><i class="fa fa-heart fa-2x"></i></div>
 									{{event.type}}
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="thumbnail">
-									<div>When</div>
-									<div><i class="fa fa-calendar fa-2x"></i> {{event.date}}</div>
+									<div><i class="fa fa-calendar fa-2x"></i></div>
+									<div> {{event.date}} - {{event.endDate}}</div>
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="thumbnail">
-									<div>Place</div>
-									<div><i class="fa fa-map-marker fa-2x"></i> {{event.address.displayName}}</div>
+									<div><i class="fa fa-map-marker fa-2x"></i></div>
+									<div> {{event.address.displayName}}</div>
 								</div>
 							</div>
 						</small>

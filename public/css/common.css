@@ -110,7 +110,7 @@ google-map {
 	width: 100%;
 	height: 100%;
 }
-#footer {
+#footerdiv {
 	position:fixed;
 	bottom: 0px;
 	height: 80px;
@@ -128,7 +128,7 @@ input[type=checkbox] {
 	top: -9999px;
 	left: -9999px;
 }
-input[type=checkbox]:checked ~ #footer {
+input[type=checkbox]:checked ~ #footerdiv {
 	left: -100%;
 	animation: hide 2s;
 	-webkit-animation: hide 2s
@@ -198,3 +198,15 @@ input[type=checkbox]:checked + label:before {
 	pointer-events: none;
 	cursor: default;
 }
+
+.table>thead>tr>th, .table>thead>tr>th>a {
+	background-color: #3C85C4;
+	color:#eeeeee;
+	text-decoration: none;
+}
+
+.table-hover>tbody>tr:hover>td, .table-hover>tbody>tr:hover>th {
+	cursor: pointer;
+	background-color: #D1D0D5;
+}
+

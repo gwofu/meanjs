@@ -10,17 +10,9 @@ angular.module('mean.core')
 		link: function (scope, element) {
 
 			scope.menu.push({
-				name: 'Event',
+				name: 'My Event',
 				items: [{
-					title: 'Show All Events',
-					link: 'events',
-					uiRoute: '/events'
-				}, {
-					title: 'Add Event',
-					link: 'events/create',
-					uiRoute: '/events/create'
-				}, {
-					title: 'My Event List',
+					title: 'All Events',
 					link: 'events/listByUser',
 					uiRoute: '/events/listByUser'
 				}, {
@@ -28,9 +20,9 @@ angular.module('mean.core')
 					link: 'appliedEvents',
 					uiRoute: '/appliedEvents'
 				}, {
-					title: 'Map Event',
-					link: 'events/mapview',
-					uiRoute: '/events/mapview'
+					title: 'Add Event',
+					link: 'events/create',
+					uiRoute: '/events/create'
 				}]
 			});
 

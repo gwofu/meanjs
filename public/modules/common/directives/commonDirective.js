@@ -65,4 +65,25 @@ angular.module('mean.common')
 		templateUrl: '/modules/common/views/modal.html',
 		link: link
 	};
-});
+})
+.directive('formatdate', ['dateFilter', function(dateFilter) {
+
+	function link(scope, element, attrs) {
+		var format = 'yyyy-mm-dd hh:mm';
+
+		scope.$watch('formatdate', function(value) {
+			console.log("inside watch...");
+			console.log("element.val = " + element.val());
+			console.log("inside watch... value = " + value);
+			element.val(dateFilter(value, format));
+			console.log("element.val = " + element.val());
+		});
+
+		console.log("element.val = " + element.val());
+	}
+
+	return {
+		restrict: 'A',
+		link: link
+	};
+}]);

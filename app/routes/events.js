@@ -7,6 +7,9 @@ module.exports = function(app) {
 	// Article Routes
 	app.get('/events', events.list);
 	app.post('/events', users.requiresLogin, events.create);
+	app.get('/events/findOpenEvents', users.requiresLogin, events.findOpenEvents);
+	app.get('/events/findCurrentEvents', users.requiresLogin, events.findCurrentEvents);
+	app.get('/events/findPastEvents', users.requiresLogin, events.findPastEvents);
 	app.get('/events/:eventId', events.read);
 	app.put('/events/:eventId', users.requiresLogin, events.hasAuthorization, events.update);
 	app.del('/events/:eventId', users.requiresLogin, events.hasAuthorization, events.delete);

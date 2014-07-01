@@ -1,6 +1,6 @@
 <section class="container" data-ng-controller="EventsController">
 	<div class="page-header">
-		<h1>New Event</h1>
+		<h3>New Event</h3>
 	</div>
 	<div class="col-md-12">
 		<form name="eventForm" class="form-horizontal" data-ng-submit="create()" novalidate>
@@ -17,8 +17,8 @@
 					</div>
 					<div class="col-md-5 col-md-offset-1">
 					<div class="form-group">
-						<label for="dtp_input1" class="control-label">Event Date</label>
-						<div class="input-group date form_datetime">
+						<label class="control-label">Start Date/Time</label>
+						<div class="input-group date form_datetime_s">
 							<input class="form-control" size="16" type="text" data-ng-model="date" readonly required>
 							<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
 							<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
@@ -37,11 +37,11 @@
 					</div>
 					<div class="col-md-5 col-md-offset-1">
 					<div class="form-group">
-						<label class="control-label" for="type">Event Type</label>
-						<div class="controls">
-							<select class="form-control" data-ng-model="type" ng-options="option.name as option.name group by option.value for option in options" required>
-								<option value="" selected> Please Select </option>
-							</select>
+						<label class="control-label">End Date/Time</label>
+						<div class="input-group date form_datetime_e">
+							<input class="form-control" size="16" type="text" data-ng-model="endDate" readonly required>
+							<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+							<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
 						</div>
 					</div>
 					</div>
@@ -49,14 +49,24 @@
 				
 				<div class="row">
 					<div class="col-md-5">
-					<div class="form-group">
-						<label class="control-label" for="type">Event Location</label>
-						<div class="controls">
-							<select class="form-control" data-ng-model="addressId" ng-options="a._id as a.street for a in addresses" required>
-								<option value="" selected> Please Select </option>
-							</select>
+						<div class="form-group">
+							<label class="control-label" for="type">Event Type</label>
+							<div class="controls">
+								<select class="form-control" data-ng-model="type" ng-options="option.name as option.name group by option.value for option in options" required>
+									<option value="" selected> Please Select </option>
+								</select>
+							</div>
 						</div>
 					</div>
+					<div class="col-md-5 col-md-offset-1">
+						<div class="form-group">
+							<label class="control-label" for="type">Event Location</label>
+							<div class="controls">
+								<select class="form-control" data-ng-model="addressId" ng-options="a._id as a.street for a in addresses" required>
+									<option value="" selected> Please Select </option>
+								</select>
+							</div>
+						</div>
 					</div>
 				</div>
 
@@ -70,5 +80,31 @@
 
 
 <script type="text/javascript">
-	$('.form_datetime').datetimepicker();
+	$('.form_datetime_s').datetimepicker({
+		//format: "dd MM yyyy - HH:ii P",
+		//showMeridian: true,
+		autoclose: true,
+		todayBtn: false,
+		pickerPosition: "bottom-left",
+		minuteStep: 10,
+		startDate: new Date()
+	});
+
+	$('.form_datetime_e').datetimepicker({
+		//format: "dd MM yyyy - HH:ii P",
+		//showMeridian: true,
+		autoclose: true,
+		todayBtn: false,
+		pickerPosition: "bottom-left",
+		minuteStep: 10,
+		startDate: new Date()
+	});
+	// $('.form_datetime:first')
+	// 	.datetimepicker()
+	// 	.on('changeDate', function(ev){
+
+	// 		if (ev.date.valueOf() < date-start-display.valueOf()){
+	// 		}
+	// });
+
 </script>

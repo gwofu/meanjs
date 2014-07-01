@@ -5,6 +5,7 @@
  */
 var mongoose = require('mongoose'),
   AppliedEvent = mongoose.model('AppliedEvent'),
+  User = mongoose.model('User'),
   _ = require('lodash');
 
 /**
@@ -64,18 +65,28 @@ exports.list = function(req, res) {
 		s = AppliedEvent.find({event: req.query.eventId}).populate('user', 'displayName').sort('-created');
 	}
 	else {
-		s = AppliedEvent.find(query).populate('event').populate('user', 'displayName').sort('-created');
+		s = AppliedEvent.find(query).populate('event').populate('event.user').populate('user', 'displayName').sort('-created');
 	}
-	s.exec(function(err, data) {
+
+	s.exec(function(err, docs) {
 		if (err) {
-			console.log('err=' + err);
 			res.render('error', {
 				status: 500
 			});
 		} else {
 			console.log('==============appliedEvents data==============');
-			console.log(data);
-			res.jsonp(data);
+
+			var opts = {
+				path: 'event.user',
+				select: 'displayName',
+				model: 'User'
+			}
+
+			AppliedEvent.populate(docs, opts, function(err, docs) {
+				console.log(docs);
+				res.jsonp(docs);
+			});
+
 		}
 	});
 };

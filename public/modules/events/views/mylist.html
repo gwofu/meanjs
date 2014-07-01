@@ -1,9 +1,9 @@
 <section class="container" data-ng-controller="EventsController" data-ng-init="find()">
 
 	<popup popupid="inboxPopup" title="Inbox"><ng-include src="'modules/events/views/inbox.html'"></ng-include></popup>
-	<div class="page-header">
-  	<h3>Total {{ events.length }} event(s) created<h3>
-	</div>
+
+	<ng-include src="'modules/events/views/eventCountTmpl.html'"></ng-include>
+
 	<div class="row">
 		<div class="col-md-6">
 			<div class="list-group">
@@ -15,11 +15,15 @@
 					</h4>
 					<div class="panel panel-primary">
 						<div class="panel-heading">
-							<span style="display:inline-block;width:80%">
+							<span style="display:inline-block;width:70%">
 								<div class='label label-info'>{{event.type}}</div><br><br>
 								<div>{{event.title}}</div>
 							</span>
 							<span class="pull-right">
+
+								<a class="btn btn-warning btn-xs" href="/#!/events/{{event._id}}/edit">
+									<i class="fa fa-edit"></i>
+								</a>
 
 								<ng-switch on="event.status">
 									<a ng-switch-when="o" class="btn btn-warning btn-xs" data-ng-click="closeRegistration(event._id)" title="Close Registration"><i class="fa fa-unlock-alt"></i></a>

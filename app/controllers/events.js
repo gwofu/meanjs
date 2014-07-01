@@ -11,14 +11,19 @@ var mongoose = require('mongoose'),
  * Create a event
  */
 exports.create = function(req, res) {
+	console.log('----------------------create-------------------');
+	console.log('req.body=' + JSON.stringify(req.body));
 	var event = new Event(req.body);
 	event.user = req.user;
 	event.save(function(err) {
+		console.log("err=" + JSON.stringify(err));
+
 		if (err) {
-			return res.send('users/signup', {
-				errors: err.errors,
-				event: event
-			});
+			// return res.send('users/signup', {
+			// 	errors: err.errors,
+			// 	event: event
+			// });
+			res.jsonp(err);
 		} else {
 			res.jsonp(event);
 		}
@@ -40,7 +45,7 @@ exports.update = function(req, res) {
 
 console.log("update------------");
 console.log("req.query.action=" + req.query.action);
-console.log("req.body=" + req.body);
+console.log("req.body=" + JSON.stringify(req.body));
 	if (req.query.action && req.query.action === 'addMember') {
 
 	}
@@ -90,6 +95,48 @@ exports.list = function(req, res) {
 		console.log('------------ req.query.state =' + req.query.state);
 		query = {'address.city': req.query.city, 'address.state': req.query.state};
 	}
+
+	Event.find(query).sort('-date').populate('user', 'displayName').exec(function(err, events) {
+		if (err) {
+			res.render('error', {
+				status: 500
+			});
+		} else {
+			res.jsonp(events);
+		}
+	});
+};
+
+exports.findOpenEvents = function(req, res) {
+	var query = {status: 'o', date: {$gt: new Date()}};
+
+	Event.find(query).sort('-date').populate('user', 'displayName').exec(function(err, events) {
+		if (err) {
+			res.render('error', {
+				status: 500
+			});
+		} else {
+			res.jsonp(events);
+		}
+	});
+};
+
+exports.findCurrentEvents = function(req, res) {
+	var query = {status: 'o', endDate: {$gt: new Date()}};
+
+	Event.find(query).sort('-date').populate('user', 'displayName').exec(function(err, events) {
+		if (err) {
+			res.render('error', {
+				status: 500
+			});
+		} else {
+			res.jsonp(events);
+		}
+	});
+};
+
+exports.findPastEvents = function(req, res) {
+	var query = {endDate: {$lt: new Date()}};
 
 	Event.find(query).sort('-date').populate('user', 'displayName').exec(function(err, events) {
 		if (err) {

@@ -41,6 +41,7 @@ angular.module('mean.events')
 		$scope.showSetting = false;
 		$scope.addresses = [];
 		$scope.appliedEvents = [];
+		$scope.reverse = false;
 
 		Addresses.search(function(addresses) {
 			if (addresses) {
@@ -68,6 +69,7 @@ angular.module('mean.events')
 				content: this.content,
 				type: this.type,
 				date: this.date,
+				endDate: this.endDate,
 				address: {
 					_id: selectedAddress._id,
 					city: selectedAddress.city,
@@ -76,14 +78,15 @@ angular.module('mean.events')
 					loc: selectedAddress.loc,
 					displayName: selectedAddress.displayName
 				}
-				//loc: [89.0, 67.1]
-				//loc: this.address.loc
 			});
 			
-			console.log('event=' + JSON.stringify(event));
-
 			event.$save(function(response) {
-				$location.path('events/' + response._id);
+				if (response._id) {
+					$location.path('events/' + response._id);
+				}
+				else {
+					console.log('response=' + JSON.stringify(response));
+				}
 			});
 
 			this.title = '';
@@ -143,14 +146,36 @@ angular.module('mean.events')
 			}
 		};
 
+		$scope.findOpenEvents = function() {
+			Events.findOpenEvents(function(events) {
+				$scope.events = events;
+				$scope.$broadcast('load.event.end', {});
+			});
+		};
+
+		$scope.findCurrentEvents = function() {
+			Events.findCurrentEvents(function(events) {
+				$scope.events = events;
+				$scope.$broadcast('load.event.end', {});
+			});
+		};
+
+		$scope.findPastEvents = function() {
+			Events.findPastEvents(function(events) {
+				$scope.events = events;
+				$scope.$broadcast('load.event.end', {});
+			});
+		};
+
 		$scope.findOne = function() {
 			Events.get({
 				eventId: $stateParams.eventId
 			}, function(event) {
+				event.date = $filter('date')(new Date(event.date), 'yyyy-MM-dd HH:mm');
+				event.endDate = $filter('date')(new Date(event.endDate), 'yyyy-MM-dd HH:mm');
 				$scope.event = event;
 
 				AppliedEventsService.findByEventAndUser(event._id, function(response) {
-					console.log("response =" + JSON.stringify(response.event));
 					$scope.event.appliedFlag = response.event ? true : false;
 				});
 

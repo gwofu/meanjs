@@ -1,7 +1,7 @@
 <section class="container" data-ng-controller="AppliedEventsController" data-ng-init="find()">
-	<div class="page-header">
-  	<h3>Total {{ events.length }} event(s) applied<h3>
-	</div>
+
+	<ng-include src="'modules/events/views/eventCountTmpl.html'"></ng-include>
+
 	<div class="row">
 		<div class="col-md-6">
 			<div class="list-group">
@@ -30,7 +30,7 @@
 									<td>Time</td>
 								</tr>
 								<tr>
-									<td>{{event.user.displayName}}</td>
+									<td>{{event.event.user.displayName}}</td>
 									<td>{{event.event.address.displayName}}</td>
 									<td>{{event.event.date | date:'EEEE, MMM d'}}</td>
 									<td>{{event.event.date | date:'hh:mm a'}}</td>

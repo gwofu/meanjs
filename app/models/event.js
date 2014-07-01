@@ -13,7 +13,7 @@ var base = require('./base');
 var EventSchema = base.makeSchema({
 		type: { type: String, trim: true }, // event type
 		date: { type: Date }, // event start date
-		enddate: { type: Date }, // event end date
+		endDate: { type: Date }, // event end date
 		status: { type: String, enum: ['o','c','a','e'], default: 'o' }, // event status
 		address: { // event place
 			_id: { type: String, trim: true },

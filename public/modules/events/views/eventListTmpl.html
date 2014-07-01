@@ -1,0 +1,31 @@
+<div class="row" data-ng-show="events && events.length > 0">
+	<div class="col-md-12">
+		<table class="table table-bordered table-hover table-condensed">
+			<thead>
+				<tr>
+					<th><a href="" ng-click="predicate = 'date'; reverse=!reverse">Date</a></th>
+					<th><a href="" ng-click="predicate = 'type'; reverse=!reverse">Type</a></th>
+					<th><a href="" ng-click="predicate = 'title'; reverse=!reverse">Title</a></th>
+					<th>Content</th>
+					<th><i class="fa fa-map-marker"></i> Place</th>
+					<th><a href="" ng-click="predicate = 'user.displayName'; reverse=!reverse">Owner</a></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr data-ng-repeat="event in events | orderBy:predicate:reverse" data-ng-click="openDetailPage(event._id)">
+					<td>{{event.date | date:'medium'}}</td>
+					<td>{{event.type}}</td>
+					<td>{{event.title}}</td>
+					<td>{{event.content}}</td>
+					<td>{{event.address.displayName}}</td>
+					<td>{{event.user.displayName}}</td>
+				</tr>
+			</tbody>
+			<tr>
+		</table>
+	</div>
+</div>
+
+<div class="alert alert-warning text-center" data-ng-hide="!events || events.length">
+	No events yet, why don't you <a href="/#!/events/create">create one</a>?
+</div>

@@ -18,6 +18,18 @@ angular.module('mean.events').config(['$stateProvider',
 
 			}
 		}).
+		state('showOpenEvent', {
+			url: '/events/openEvents',
+			templateUrl: 'modules/events/views/openEvents.html'
+		}).
+		state('showCurrentEvent', {
+			url: '/events/currentEvents',
+			templateUrl: 'modules/events/views/currentEvents.html'
+		}).
+		state('showPastEvent', {
+			url: '/events/pastEvents',
+			templateUrl: 'modules/events/views/pastEvents.html'
+		}).
 		state('createEvent', {
 			url: '/events/create',
 			templateUrl: 'modules/events/views/create.html'
