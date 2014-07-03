@@ -7,7 +7,7 @@
 				display: block;
 		}
 }
-a.undecorated-link:hover {
+a:hover, a.undecorated-link:hover {
 	text-decoration: none;
 }
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {

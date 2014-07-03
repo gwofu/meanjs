@@ -10,6 +10,7 @@ angular.module('mean.common')
 
 		function showAddress(results, status) {
 			if (status === google.maps.GeocoderStatus.OK) {
+				console.log('results[0]=' + JSON.stringify(results[0]));
 				
 				map.setCenter(results[0].geometry.location);
 				var marker = new google.maps.Marker( {
@@ -18,6 +19,8 @@ angular.module('mean.common')
 				});
 
 				scope.location = results[0].geometry.location;
+				console.log('location=' + scope.location);
+
 				scope.displayname = results[0].formatted_address;
 				console.log('displayName=' + scope.displayname);
 			} else {
@@ -40,7 +43,8 @@ angular.module('mean.common')
 		});
 
 		element.on('hide.bs.modal', function () {
-			console.log('scope.location=' + JSON.stringify(scope.location));
+			console.log('scope.location.lat()=' + scope.location.lat());
+			console.log('scope.location.lng()=' + scope.location.lng());
 		});
 
 		scope.saveAddress = function() {

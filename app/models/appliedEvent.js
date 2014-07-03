@@ -15,7 +15,8 @@ var AppliedEventSchema = new Schema({
 	created: {
 		type: Date,
 		default: Date.now
-	}
+	},
+	status: { type: String, enum: ['p','m','n'], default: 'p' } // p(pending), m(member), n(not a member)
 });
 
 AppliedEventSchema.statics = {

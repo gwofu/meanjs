@@ -352,6 +352,10 @@ angular.module('mean.events')
 				users.push(children[i].getAttribute('userid'));
 			}
 
+			AppliedEventsService.setMembers($scope.eventId, users, function(response) {
+				console.log("AppliedEventsService.setMembers done");
+			});
+
 			var event = new Events({
 				_id: $scope.eventId,
 				members: users

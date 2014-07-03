@@ -93,7 +93,7 @@ angular.module('mean.common')
 		link: postLink
 	};
 })
-.directive('googleMap', function() {
+.directive('googleMap', function($filter) {
 
 	var heatmapPoints = [
 		new google.maps.LatLng(41.0182827999113,28.973224999734),
@@ -123,9 +123,11 @@ angular.module('mean.common')
 		boxText.className = 'panel panel-primary';
 		boxText.innerHTML = '<div class="panel-heading">' + event.user.displayName + ': ' + event.title +
 			'</div><div class="panel-body">' + event.content + '</div>' +
-			'<table class="table"><tr><td class="' + appliedClass + ' applyPosition' + key + '"><span class="glyphicon glyphicon-ok">' +
+			'<table class="table"><tr><td><i class="fa fa-calendar"></i><span>&nbsp;From: ' + $filter('date')(event.date, 'MM/dd/yy hh:mm a') +
+			'</span></td><td><i class="fa fa-calendar"></i><span>&nbsp;To: ' + $filter('date')(event.endDate, 'MM/dd/yy hh:mm a') +
+			'</span></td><tr><tr><td class="' + appliedClass + ' applyPosition' + key + '"><span class="glyphicon glyphicon-ok">' +
 			'</span><span>' + text + '</span></td><td class="scale2">' +
-			'<span class="glyphicon glyphicon-eye-open"></span><span> Watch</span></td><tr></table>';
+			'<a href="#!/events/' + event._id + '/detail"><i class="fa fa-link"></i><span> Go to detail</span></a></td><tr></table>';
 
 		var myOptions = {
 			content: boxText

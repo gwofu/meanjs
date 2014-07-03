@@ -51,9 +51,9 @@
 			</div>
 		</div>
 		<div class="col-md-6">
-			<div class="{{ openFlag ? 'selectUser' : ''}} list-group">
+			<div class="{{ openFlag ? 'selectUser' : ''}} list-group userList">
 				<div class="list-group-item list-group-item-info" style="text-align:center">
-					User applied and selected<a class="btn btn-warning btn-xs pull-right" data-ng-click="updateMember()" data-ng-show="openFlag">
+					Select Member<a class="btn btn-warning btn-xs pull-right" data-ng-click="updateMember()" data-ng-show="openFlag">
 					<i class="fa fa-spinner fa-spin" data-ng-show="saveFlag"></i>
 					<i class="fa fa-cloud-upload" style="vertical-align:middle"></i> Save</a>
 				</div>
@@ -68,8 +68,8 @@
 
 <script type="text/javascript">
 
-$(function() {
-	$('.selectUser').on('click','a', function() {
+function toggleCheck() {
+	$('.userList').on('click','a', function() {
 		var c = $(this).children('i');
 		if (c.hasClass("fa-check-square-o")) {
 			c.removeClass("fa-check-square-o").addClass("fa-square-o");
@@ -77,6 +77,10 @@ $(function() {
 			c.removeClass("fa-square-o").addClass("fa-check-square-o");
 		}
 	});
+}
+
+angular.element(document).ready(function() {
+	toggleCheck();
 });
 
 </script>

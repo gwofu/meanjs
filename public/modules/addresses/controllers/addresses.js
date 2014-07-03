@@ -8,14 +8,14 @@ angular.module('mean.addresses')
 
 		$scope.create = function() {
 			console.log('==============create================');
-
+			console.log($scope.location);
 			var address = new Addresses({
 				street: this.address.street,
 				city: this.address.city,
 				state: this.address.state,
 				zip: this.address.zip,
 				displayName: this.address.displayName,
-				loc: [this.address.location.k, this.address.location.A]
+				loc: [this.address.location.lat(), this.address.location.lng()]
 			});
 			
 			console.log('address=' + JSON.stringify(address));
@@ -56,7 +56,7 @@ angular.module('mean.addresses')
 				address.updated = [];
 			}
 			var location = $scope.address.location;
-			address.loc = [location.k, location.A];
+			address.loc = [location.lat(), location.lng()];
 			address.updated.push(new Date().getTime());
 
 			address.$update(function() {

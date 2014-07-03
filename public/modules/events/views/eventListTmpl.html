@@ -3,7 +3,8 @@
 		<table class="table table-bordered table-hover table-condensed">
 			<thead>
 				<tr>
-					<th><a href="" ng-click="predicate = 'date'; reverse=!reverse">Date</a></th>
+					<th><a href="" ng-click="predicate = 'date'; reverse=!reverse">Start Date</a></th>
+					<th><a href="" ng-click="predicate = 'endDate'; reverse=!reverse">End Date</a></th>
 					<th><a href="" ng-click="predicate = 'type'; reverse=!reverse">Type</a></th>
 					<th><a href="" ng-click="predicate = 'title'; reverse=!reverse">Title</a></th>
 					<th>Content</th>
@@ -13,7 +14,8 @@
 			</thead>
 			<tbody>
 				<tr data-ng-repeat="event in events | orderBy:predicate:reverse" data-ng-click="openDetailPage(event._id)">
-					<td>{{event.date | date:'medium'}}</td>
+					<td>{{event.date | date:'MM/dd/yy h:mm a'}}</td>
+					<td>{{event.endDate | date:'MM/dd/yy h:mm a'}}</td>
 					<td>{{event.type}}</td>
 					<td>{{event.title}}</td>
 					<td>{{event.content}}</td>

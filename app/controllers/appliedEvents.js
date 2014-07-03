@@ -120,3 +120,24 @@ exports.eventByID = function(req, res, next, id) {
 		next();
 	});
 };
+
+exports.setMembers = function(req, res) {
+	var query = null
+	var eventId = req.body.eventId;
+	var userIds = req.body.userIds;
+
+	userIds.forEach(function(userId) {
+		console.log(userId);
+		query = {event: eventId, user: userId};
+
+		AppliedEvent.findOneAndUpdate(query, {status: 'm'}, function(err, doc) {
+			if (err) {
+				res.render('error', {
+					status: 500
+				});
+			}
+		});
+
+	});
+
+};

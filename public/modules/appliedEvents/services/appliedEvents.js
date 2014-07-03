@@ -26,6 +26,10 @@ angular.module('mean.appliedEvents').factory('AppliedEvents', ['$resource', func
 			},
 			url: 'appliedEvents/findByEventAndUser'
 		},
+		setMembers: {
+			method: 'POST',
+			url: 'appliedEvents/setMembers'
+		},
 		deleteById: {
 			method: 'DELETE'
 		}
@@ -76,5 +80,18 @@ angular.module('mean.appliedEvents').service('AppliedEventsService', function(Ap
 		},function(data) {
 			callback(data);
 		});
-	}
+	};
+
+	this.setMembers = function(eventId, userIds, callback) {
+		console.log("*** this.setMembers ***");
+		console.log("eventId=" + eventId);
+		console.log("userIds=" + userIds);
+		AppliedEvents.setMembers({
+			eventId: eventId,
+			userIds: userIds
+		},function(data) {
+			callback(data);
+		});
+	};
+
 });

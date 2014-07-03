@@ -23,7 +23,7 @@
 							</div>
 							<br><br>
 							<ng-switch on="event.appliedFlag">
-								<button ng-switch-when="true" type="button" class="btn btn-info btn-lg" disabled>You are a member of this event!</button>
+								<button ng-switch-when="true" type="button" class="btn btn-info btn-lg" disabled>You have applied this event!</button>
 								<button ng-switch-default type="button" class="btn btn-info btn-lg" data-ng-click="detailApplyPosition($event)">I want to help!</button>
 							</ng-switch>
 						</div>
@@ -41,7 +41,7 @@
 							<div class="col-md-4">
 								<div class="thumbnail">
 									<div><i class="fa fa-calendar fa-2x"></i></div>
-									<div> {{event.date}} - {{event.endDate}}</div>
+									<div> {{event.date | date: 'MM/dd/yy hh:mm a'}} - {{event.endDate | date: 'MM/dd/yy hh:mm a'}}</div>
 								</div>
 							</div>
 							<div class="col-md-4">

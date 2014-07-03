@@ -85,11 +85,15 @@
 												<td>{{event.address.displayName}}</td>
 											</tr>
 											<tr>
-												<td><span class="glyphicon glyphicon-time"></span></td>
-												<td>{{event.created | date:'medium'}}</td>
+												<td>Start Time</td>
+												<td>{{event.date | date:'MM/dd/yy hh:mm a'}}</td>
 											</tr>
 											<tr>
-												<td><span class="glyphicon glyphicon-user"></span></td>
+												<td>End Time</td>
+												<td>{{event.endDate | date:'MM/dd/yy hh:mm a'}}</td>
+											</tr>
+											<tr>
+												<td>Owner</td>
 												<td>{{event.user.displayName}}</td>
 											</tr>
 										</table>

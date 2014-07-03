@@ -10,6 +10,7 @@ exports.create = function(req, res) {
 
 	address.save(function(err) {
 		if (err) {
+			console.log(JSON.stringify(err));
 			return res.send('address/create', {
 				errors: err.errors,
 				address: address
@@ -31,6 +32,7 @@ exports.update = function(req, res) {
 
 	address.save(function(err) {
 		if (err) {
+			console.log(JSON.stringify(err));
 			res.render('error', {
 				status: 500
 			});

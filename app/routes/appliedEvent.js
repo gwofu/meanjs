@@ -6,6 +6,7 @@ module.exports = function(app) {
 
 	// Routes
 	app.post('/appliedEvents', users.requiresLogin, appliedEvent.create);
+	app.post('/appliedEvents/setMembers', users.requiresLogin, appliedEvent.setMembers);
 	app.get('/appliedEvents', users.requiresLogin, appliedEvent.list);
 	app.get('/appliedEvents/findByEventAndUser', users.requiresLogin, appliedEvent.findByEventAndUser);
 	app.del('/appliedEvents/:appliedEventId', users.requiresLogin, appliedEvent.delete);
