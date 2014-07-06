@@ -8,13 +8,14 @@ var base = require('./base');
 /**
  * Event Schema
  * status: the status of the event. 
- *   o: open registration, c: registration complete, a: active, e: event expired
+ *   o: open registration, c: registration complete, a: active, e: event expired, l: cancel
  */
 var EventSchema = base.makeSchema({
 		type: { type: String, trim: true }, // event type
 		date: { type: Date }, // event start date
 		endDate: { type: Date }, // event end date
-		status: { type: String, enum: ['o','c','a','e'], default: 'o' }, // event status
+		status: { type: String, enum: ['o','c','a','e', 'l'], default: 'o' }, // event status
+		shour: { type: Number, default: 0 }, // service hour
 		address: { // event place
 			_id: { type: String, trim: true },
 			city: { type: String, trim: true },

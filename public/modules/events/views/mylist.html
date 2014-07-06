@@ -1,6 +1,8 @@
-<section class="container" data-ng-controller="EventsController" data-ng-init="find()">
+<section class="container" data-ng-controller="EventsController" data-ng-init="find(); showToolbar=false">
 
-	<popup popupid="inboxPopup" title="Inbox"><ng-include src="'modules/events/views/inbox.html'"></ng-include></popup>
+	<popup popupid="inboxPopup" title="Inbox" hide-footer="true"><ng-include src="'modules/events/views/inbox.html'"></ng-include></popup>
+
+	<popup popupid="selectMemberPopup" title="Select Member" hide-footer="true"><ng-include src="'modules/events/views/selectMemberPopup.html'"></ng-include></popup>
 
 	<ng-include src="'modules/events/views/eventCountTmpl.html'"></ng-include>
 
@@ -11,30 +13,32 @@
 					<div ng-switch on="$index == 0 || (event.date.substr(0,10) != events[$index - 1].date.substr(0,10))">
 						<h3 ng-switch-when="true" class="date">{{event.date | date:'EEEE, MMM d'}}</h3>
 					</div>
-					<h4><span class="date">{{event.date | date:'hh:mm a'}}</span>
+					<h4><span class="date">{{event.date | date:'hh:mm a'}} - {{event.endDate | date:'hh:mm a'}}</span>
 					</h4>
-					<div class="panel panel-primary">
+					<div class="panel  {{ event.status == 'l' ? 'panel-default disabled' : 'panel-primary'}}">
 						<div class="panel-heading">
-							<span style="display:inline-block;width:70%">
-								<div class='label label-info'>{{event.type}}</div><br><br>
+							<div class="alert alert-info" ng-show="event.status == 'l'">This event is cancelled.</div>
+							<span style="display:inline-block;width:60%">
+								<span class='label label-info'>{{event.type}}</span>&nbsp;&nbsp;
+								<span class="badge">{{ event.shour }}</span><small> service Hour</small><br><br>
 								<div>{{event.title}}</div>
 							</span>
 							<span class="pull-right">
 
-								<a class="btn btn-warning btn-xs" href="/#!/events/{{event._id}}/edit">
-									<i class="fa fa-edit"></i>
+								<a class="btn {{ event.status == 'l' ? 'btn-default disabled' : 'btn-warning'}}" href="/#!/events/{{event._id}}/edit" title="Edit event">
+									<i class="fa fa-pencil-square-o"></i>
 								</a>
 
 								<ng-switch on="event.status">
-									<a ng-switch-when="o" class="btn btn-warning btn-xs" data-ng-click="closeRegistration(event._id)" title="Close Registration"><i class="fa fa-unlock-alt"></i></a>
-									<span ng-switch-default class="btn btn-info btn-xs disabled" title="Registration closed"><i class="fa fa-lock"></i></span>
+									<a ng-switch-when="o" class="btn btn-warning" data-ng-click="closeRegistration(event._id)" title="Close Registration"><i class="fa fa-unlock-alt"></i></a>
+									<span ng-switch-default class="btn btn-default disabled" title="Registration closed"><i class="fa fa-lock"></i></span>
 								</ng-switch>
 
-								<a class="btn btn-warning btn-xs" data-ng-click="getUsersApplied(event._id, event.members, event.status)" title="User applied"><i class="fa fa-user"></i></a>
+								<a class="btn {{ event.status == 'l' ? 'btn-default disabled' : 'btn-warning'}}" data-toggle="modal" data-target="#selectMemberPopup" data-ng-click="getUsersApplied(event._id, event.members, event.status)" title="Select member from applied users"><i class="fa fa-user"></i></a>
 
-								<a class="btn btn-warning btn-xs" data-toggle="modal" data-target="#inboxPopup" data-ng-click="inboxMessages(event)" title="Messages"><span class="glyphicon glyphicon-envelope"></span></a>
+								<a class="btn {{ event.status == 'l' ? 'btn-default disabled' : 'btn-warning'}}" data-toggle="modal" data-target="#inboxPopup" data-ng-click="inboxMessages(event._id)" title="Show messages"><i class="fa fa-envelope-o"></i></a>
 
-								<a class="btn btn-warning btn-xs" data-ng-click="remove(event)" title="Delete event"><span class="glyphicon glyphicon-remove"></span></a>
+								<a class="btn {{ event.status == 'l' ? 'btn-default disabled' : 'btn-warning'}}" data-ng-click="cancelEvent(event)" title="Cancel this event"><i class="fa fa-trash-o"></i></a>
 
 							</span>
 						</div>
@@ -50,37 +54,20 @@
 				No events yet, why don't you <a href="/#!/events/create">create one</a>?
 			</div>
 		</div>
-		<div class="col-md-6">
-			<div class="{{ openFlag ? 'selectUser' : ''}} list-group userList">
-				<div class="list-group-item list-group-item-info" style="text-align:center">
-					Select Member<a class="btn btn-warning btn-xs pull-right" data-ng-click="updateMember()" data-ng-show="openFlag">
-					<i class="fa fa-spinner fa-spin" data-ng-show="saveFlag"></i>
-					<i class="fa fa-cloud-upload" style="vertical-align:middle"></i> Save</a>
-				</div>
-				<a href="javascript:void(0);" class="list-group-item" data-ng-repeat="obj in usersApplied">
-					<i class="fa fa-2x {{ obj.selected == true ? 'fa-check-square-o' : 'fa-square-o'}}" style="vertical-align:middle" userid="{{obj.user._id}}"></i>  {{ obj.user.displayName }}
-				</a>
-			</div>
-		</div>
 	</div>
 
 </section>
 
 <script type="text/javascript">
 
-function toggleCheck() {
-	$('.userList').on('click','a', function() {
-		var c = $(this).children('i');
-		if (c.hasClass("fa-check-square-o")) {
-			c.removeClass("fa-check-square-o").addClass("fa-square-o");
-		} else {
-			c.removeClass("fa-square-o").addClass("fa-check-square-o");
-		}
+function mouseOver() {
+	$('.list-group').on('mouseover', '.panel', function() {
+		$('.toolbar').show();
 	});
 }
 
 angular.element(document).ready(function() {
-	toggleCheck();
+	//mouseOver();
 });
 
 </script>

@@ -209,4 +209,3 @@ input[type=checkbox]:checked + label:before {
 	cursor: pointer;
 	background-color: #D1D0D5;
 }
-

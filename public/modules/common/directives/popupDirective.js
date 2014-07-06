@@ -5,14 +5,27 @@
 angular.module('mean.common')
 .directive('popup', function() {
 
-	function link(scope, element, attrs) {
+	function link(scope, element, attrs, ngModel) {
+
+		scope.activeFlag = false;
+
+		if (ngModel) {
+			// Listen for change events to enable binding
+			element.on('blur keyup change', function() {
+				scope.$apply(function(){
+					var text = angular.element('textarea').val();
+					ngModel.$setViewValue(text);
+					scope.activeFlag = ngModel.$viewValue.length > 0;
+				});
+			});
+		}
 
 		element.on('shown.bs.modal', function() {
-			console.log('shown');
+			//console.log('shown');
 		});
 
 		element.on('hide.bs.modal', function () {
-			console.log('hide');
+			//console.log('hide');
 		});
 
 		scope.success = function() {
@@ -24,10 +37,12 @@ angular.module('mean.common')
 
 	return {
 		restrict: 'E',
+		require: '?ngModel',
 		transclude: true,
 		scope: {
 			popupid: '@',
 			title: '@',
+			hideFooter: '@',
 			zoom: '@',
 			init: '&',
 			successFn: '&'

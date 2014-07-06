@@ -3,40 +3,40 @@
 
 	<div class="row">
 		<div class="col-md-6 bg-info">
-			<div ng-switch="messages.length">
-				<div ng-switch-when="0">
-					No message.
-				</div>
-				<div ng-switch-default>
-					<div class="list-group">
-						<div data-ng-repeat="message in messages | orderBy:'created':true">
-							<input type="text" data-ng-model="reply" class="form-control">
-							<a class="btn btn-warning btn-sm" ng-hide="!reply.trim()" placeholder="Reply message" data-ng-click="replyMessage(message, reply)">Reply</a>
+			<div ng-show="messages.length > 0">
+				<div class="list-group">
+					<div data-ng-repeat="message in messages | orderBy:'created':true">
 
-							<div ng-switch on="$index == 0 || (message.created.substr(0,10) != messages[$index - 1].created.substr(0,10))">
-								<h3 ng-switch-when="true">{{message.created | date:'EEEE, MMM d'}}</h3>
+						<div ng-switch on="$index == 0 || (message.created.substr(0,10) != messages[$index - 1].created.substr(0,10))">
+							<h3 ng-switch-when="true">{{message.created | date:'EEEE, MMM d'}}</h3>
+						</div>
+						<a data-ng-href="#!/messages/{{message._id}}"></a>
+						<div class="panel panel-danger">
+							<div class="panel-heading">
+								<span>From: {{message.user.displayName}}</span>
+								<span class="pull-right">
+									<a class="btn btn-warning btn-sm" data-ng-click="showReplyInput(message)" title="Reply messages"><i class="fa fa-envelope-o"></i></a>
+								</span>
 							</div>
-							<a data-ng-href="#!/messages/{{message._id}}"></a>
-							<div class="panel panel-danger">
-								<div class="panel-heading">
-									<h3 class="panel-title">
-										<span class='label label-info'>{{message.type}}</span> {{message.title}}
-										<span class="pull-right">From: {{message.user.displayName}}<span>
-									</h3>
-								</div>
-								<div class="panel-body">
-									{{message.content}}
-								</div>
-								<div class="panel-footer"><small>{{message.created | date:'medium'}}</small>
-								</div>
+							<div class="panel-body">
+								{{message.content}}
+							</div>
+							<div class="panel-footer"><small>{{message.created | date:'medium'}}</small>
 							</div>
 						</div>
 					</div>
 				</div>
-			<div class="alert alert-warning text-center" data-ng-hide="!messages || messages.length">
-				No message
 			</div>
 		</div>
+		<div class="col-md-6" ng-show="message">
+			<input type="text" data-ng-model="reply" class="form-control">
+			<button class="btn btn-warning btn-sm {{!reply.trim() ? 'disabled' : ''}}" data-ng-click="replyMessage(message, reply)">Reply</button>
+			<button class="btn btn-warning btn-sm" data-ng-click="message = null">Cancel</button>
+
+		</div>
+	</div>
+	<div class="alert alert-warning text-center" data-ng-hide="!messages || messages.length">
+		No message
 	</div>
 </section>
 

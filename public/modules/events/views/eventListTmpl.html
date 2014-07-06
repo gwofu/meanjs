@@ -6,6 +6,7 @@
 					<th><a href="" ng-click="predicate = 'date'; reverse=!reverse">Start Date</a></th>
 					<th><a href="" ng-click="predicate = 'endDate'; reverse=!reverse">End Date</a></th>
 					<th><a href="" ng-click="predicate = 'type'; reverse=!reverse">Type</a></th>
+					<th><a href="" ng-click="predicate = 'type'; reverse=!reverse">Service Hour</a></th>
 					<th><a href="" ng-click="predicate = 'title'; reverse=!reverse">Title</a></th>
 					<th>Content</th>
 					<th><i class="fa fa-map-marker"></i> Place</th>
@@ -17,6 +18,7 @@
 					<td>{{event.date | date:'MM/dd/yy h:mm a'}}</td>
 					<td>{{event.endDate | date:'MM/dd/yy h:mm a'}}</td>
 					<td>{{event.type}}</td>
+					<td>{{event.shour}}</td>
 					<td>{{event.title}}</td>
 					<td>{{event.content}}</td>
 					<td>{{event.address.displayName}}</td>

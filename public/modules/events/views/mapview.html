@@ -123,6 +123,7 @@ var y = 0;
 $(function() {
 	$('#mapmenu').mousedown(function(e) {
 		dragObj = $(this);
+		// x, y is the mouse position relative to the left/top of the object.
 		x = e.pageX - dragObj.offset().left;
 		y = e.pageY - dragObj.offset().top;
 	});
@@ -135,6 +136,7 @@ $(function() {
 		}
 
 		var offset = dragObj.offset();
+		// Keep the x,y fixed.
 		offset.left = e.pageX - x;
 		offset.top = e.pageY - y;
 		dragObj.offset(offset);

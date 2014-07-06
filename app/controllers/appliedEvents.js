@@ -28,7 +28,7 @@ exports.create = function(req, res) {
 exports.read = function(req, res) {
 	console.log('=========appliedEvents=====read==============');
 
-	res.jsonp(req.query);
+	res.jsonp(req.appliedEvent);
 };
 
 exports.findByEventAndUser = function(req, res) {

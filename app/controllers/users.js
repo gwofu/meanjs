@@ -5,6 +5,7 @@
  */
 var mongoose = require('mongoose'),
 	passport = require('passport'),
+	account = require('./account'),
 	User = mongoose.model('User'),
 	_ = require('lodash');
 
@@ -47,6 +48,8 @@ exports.signup = function(req, res) {
 				message: getErrorMessage(err)
 			});
 		} else {
+			account.create(req, res); // Create account record
+
 			// Remove sensitive data before login
 			user.password = undefined;
 			user.salt = undefined;

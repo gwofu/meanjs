@@ -1,12 +1,12 @@
 {
 	"name": "meanjs",
 	"description": "Full-Stack JavaScript with MongoDB, Express, AngularJS, and Node.js.",
-	"version": "0.2.2",
+	"version": "0.0.1",
 	"private": false,
-	"author": "https://github.com/meanjs/mean/graphs/contributors",
+	"author": "Gwowen Fu gwofu@yahoo.com",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/meanjs/mean.git"
+		"url": "https://github.com/gwofu/meanjs.git"
 	},
 	"engines": {
 		"node": "0.10.x",

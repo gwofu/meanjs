@@ -7,14 +7,23 @@
 			<div class="list-group">
 				<div data-ng-repeat="event in events">
 					<div>{{event.created | date:'medium'}} applied</div>
-					<div class="panel panel-primary">
+					<div class="panel {{ event.event.status == 'l' ? 'panel-default disabled' : 'panel-primary' }}">
 						<div class="panel-heading">
+							<ng-switch on="event.status">
+								<div ng-switch-when="m" class="panel panel-success"><div class="panel-heading">Your are selected as a member. Please attend the event on time or contact owner for detail.</div></div>
+							</ng-switch>
+
+							<div class="alert alert-danger" ng-show="event.event.status == 'l'">This event is cancelled by the owner. you can click on X to cancel and remove it from your list.</div>
+							<div class="alert alert-danger" ng-show="event.status != 'm' && event.event.status == 'c'">This event is not available now. you can click on X to remove it from your list.</div>
+							<div class="alert alert-danger" ng-show="event.status == 'p' && event.event.status == 'o'">This event is not available now. you can click on X to remove it from your list.</div>
+
+
 							<span style="display:inline-block;width:80%">
 								<div class='label label-info'>{{event.event.type}}</div><br><br>
 								<div>{{event.event.title}}</div>
 							</span>
 							<span class="pull-right">
-								<a class="btn btn-warning btn-xs" data-ng-click="deleteAppliedEvent(event._id)"><span class="glyphicon glyphicon-remove"></span></a>
+								<a class="btn btn-warning btn-xs" data-ng-click="deleteAppliedEvent(event._id)" title="Cancel my application"><span class="glyphicon glyphicon-remove"</span></a>
 							</span>
 						</div>
 						<div class="panel-body">

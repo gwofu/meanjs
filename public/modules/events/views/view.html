@@ -51,15 +51,28 @@
 						</div>
 					</div>
 				</div>
+				<div class="row">
+					<div class="col-md-5">
+						<div class="form-group">
+							<label class="control-label">Service Hour</label>
+							<input class="form-control" type="number" value="{{event.shour}}" readonly>
+						</div>
+					</div>
+					<div class="col-md-5 col-md-offset-1">
+					</div>
+				</div>
 			</form>
 		</div>
 	</div>
 
 	<div class="pull-right" data-ng-show="authentication.user._id == event.user._id">
-		<a class="btn btn-primary" href="/#!/events/{{event._id}}/edit">
+		<a class="btn btn-primary" href="/#!/events/{{event._id}}/detail" title="View Detail">
+			<i class="glyphicon glyphicon-link"></i>
+		</a>
+		<a class="btn btn-primary" href="/#!/events/{{event._id}}/edit" title="Edit">
 			<i class="glyphicon glyphicon-edit"></i>
 		</a>
-		<a class="btn btn-primary" data-ng-click="remove();">
+		<a class="btn btn-primary" data-ng-click="remove();" title="Delete">
 			<i class="glyphicon glyphicon-trash"></i>
 		</a>
 	</div>

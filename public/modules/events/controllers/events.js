@@ -68,6 +68,7 @@ angular.module('mean.events')
 				title: this.title,
 				content: this.content,
 				type: this.type,
+				shour: this.shour,
 				date: this.date,
 				endDate: this.endDate,
 				address: {
@@ -95,7 +96,22 @@ angular.module('mean.events')
 			this.date = '';
 		};
 
+		$scope.cancelEvent = function(event) {
+			// Notify users who applied this event
+			AppliedEventsService.findByEventId(event._id, function(data) {
+				angular.forEach(data, function(obj, index) {
+					console.log(JSON.stringify(obj));
+				});
+			});
+
+			event.status = 'l'; // cancel event
+			event.$update(function() {
+				event.canceled = true;
+			});
+		};
+
 		$scope.remove = function(event) {
+			// Remove event
 			if (event) {
 				event.$remove();
 
@@ -181,7 +197,7 @@ angular.module('mean.events')
 
 				$scope.$broadcast('load.event.end', $scope.event.address.loc);
 
-				$scope.inboxMessages();
+				$scope.inboxMessages( $scope.event._id);
 
 			});
 		};
@@ -209,11 +225,8 @@ angular.module('mean.events')
 			$scope.event = event;
 		};
 
-		$scope.inboxMessages = function() {
-			console.log($scope.event);
-			//$scope.event = event;
-
-			MessageService.findByEventId($scope.event._id, function(messages) {
+		$scope.inboxMessages = function(eventId) {
+			MessageService.findByEventId(eventId, function(messages) {
 				$scope.messages = messages;
 			});
 		};
@@ -224,11 +237,12 @@ angular.module('mean.events')
 				title: 'Re: ' + message.title,
 				content: reply,
 				type: 2, // 2: reply message
-				event: $scope.event._id
+				event: message.event._id
 			});
 			
 			newMessage.$save(function(response) {
 				$scope.messages.unshift(response);
+				$scope.message = null;
 			});
 		};
 
@@ -253,7 +267,10 @@ angular.module('mean.events')
 		};
 
 		$scope.simpleCreateSuccessFn = function() {
+			console.log("simpleCreateSuccessFn");
+
 			var content = $('.messageCreate > textarea').val();
+			console.log("content=" + content);
 
 			var message = new Messages({
 				to: $scope.event.user._id,
@@ -271,20 +288,6 @@ angular.module('mean.events')
 
 		$scope.inboxSuccessFn = function() {
 
-		};
-
-		$scope.findMessagesByEvent = function() {
-			console.log('findByEventId called');
-			if (!$scope.event) {
-				//console.log('event is not selected');
-				return;
-			}
-
-			console.log('event=' + JSON.stringify($scope.event));
-
-			MessageService.findByEventId($scope.event._id, function(messages) {
-				$scope.messages = messages;
-			});
 		};
 
 		$scope.$on('show.setting', function (event, showSettingFlag) {
@@ -380,6 +383,8 @@ angular.module('mean.events')
 			});
 		};
 
-
+		$scope.showReplyInput = function(message) {
+			$scope.message = message;
+		}
 	}
 ]);

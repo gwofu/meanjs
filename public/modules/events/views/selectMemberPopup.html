@@ -1,0 +1,33 @@
+<section class="container" data-ng-controller="EventsController">
+
+	<div class="{{ openFlag ? 'selectUser' : ''}} list-group userList">
+		<div class="list-group-item list-group-item-info" style="text-align:center">
+			Select Member<a class="btn btn-warning btn-xs pull-right" data-ng-click="updateMember()" data-ng-show="openFlag">
+			<i class="fa fa-spinner fa-spin" data-ng-show="saveFlag"></i>
+			<i class="fa fa-cloud-upload" style="vertical-align:middle"></i> Save</a>
+		</div>
+		<a href="javascript:void(0);" class="list-group-item" data-ng-repeat="obj in usersApplied">
+			<i class="fa fa-2x {{ obj.selected == true ? 'fa-check-square-o' : 'fa-square-o'}}" style="vertical-align:middle" userid="{{obj.user._id}}"></i>  {{ obj.user.displayName }}
+		</a>
+	</div>
+
+</section>
+
+<script type="text/javascript">
+
+function toggleCheck() {
+	$('.userList').on('click','a', function() {
+		var c = $(this).children('i');
+		if (c.hasClass("fa-check-square-o")) {
+			c.removeClass("fa-check-square-o").addClass("fa-square-o");
+		} else {
+			c.removeClass("fa-square-o").addClass("fa-check-square-o");
+		}
+	});
+}
+
+angular.element(document).ready(function() {
+	toggleCheck();
+});
+
+</script>

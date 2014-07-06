@@ -1,6 +1,6 @@
 <section data-ng-controller="EventsController" data-ng-init="findOne()">
 
-<popup popupid="contactPopup" title="Comment" success-fn="simpleCreateSuccessFn()"><ng-include src="'modules/messages/views/simpleCreate.html'"></ng-include></popup>
+<popup popupid="contactPopup" title="Comment" ng-model="popmessage" success-fn="simpleCreateSuccessFn()"><ng-include src="'modules/messages/views/simpleCreate.html'"></ng-include></popup>
 
 <div class="row">
 	<div class="col-md-3">
@@ -21,6 +21,7 @@
 							<div class="contentLarge">
 								{{event.content}}
 							</div>
+							Earn <span class="badge">{{ event.shour }}</span> service hour
 							<br><br>
 							<ng-switch on="event.appliedFlag">
 								<button ng-switch-when="true" type="button" class="btn btn-info btn-lg" disabled>You have applied this event!</button>
