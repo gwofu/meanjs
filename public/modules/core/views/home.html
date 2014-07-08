@@ -1,9 +1,18 @@
 <section data-ng-controller="HomeController">
 	<div class="bg"></div>
 	<div class="jumbotron">
-		<h1>XinDong Time Bank</h1>
-		<p>Volunteer time bank platform - Use the concept of time bank. Members provide services for other members to earn service hour. Service hours can then be used to get services provided by other members.</p>
-		<p><a class="btn btn-primary btn-lg" role="button">Learn more</a></p>
+		<div class="row">
+			<div class="col-md-3">
+				<img src="/img/king-fish.jpg" class="img-circle">
+			</div>
+			<div class="col-md-offset-1 col-md-8">
+					<h1>XinDong Time Bank</h1>
+					<p>Volunteer time bank platform - Use the concept of time bank. Members provide services for other members to earn service hour. Service hours can then be used to get services provided by other members.</p>
+					<p>
+					<button class="btn btn-info" data-toggle="modal" data-target="#learnmore">Learn more &raquo;</button>
+					</p>
+			</div>
+		</div>
 	</div>
 
 	<div class="row">
@@ -26,6 +35,32 @@
 		</div>
 	</div>
 </section>
+
+<!-- Modal -->
+<div class="modal fade" id="learnmore" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title" id="myModalLabel">心動時間銀行</h4>
+			</div>
+			<div class="modal-body">
+				
+<p class="lead">目標用戶是誰？<small>
+以全民為目標. 提供一個讓弱勢團體能夠在能力範圍內服務他人進而有尊嚴的享受應得的服務, 鼓勵青年學子們參與志工活動進而了解與關懷社區, 讓退休或失業者善盡自身專業才能進而豐富生活或走出生命低潮.</small></p>
+
+<p class="lead">如何有效的解決他們的問題？<small>
+整合志工服務與時間銀行的觀念, 創建一個交易服務時數 (Service Hour) 以地圖為導向的網路平台. 服務時數的取得方法有兩種: 完成別人要求的服務項目或提供等價物品的捐贈或捐款. 特別是老弱婦孺, 學生或失業者, 利用自己的才能或時間服務他人和社區, 不但可以拓展人際關係豐富精神生活, 並且獲得的服務時數可用來換取其他的服務或商品. 希望這樣的一個平台能夠促進人與人之間的交流而讓生活更有意義.
+
+服務時數的提供可來自任何個人, 政府機關, 組織團體, 或公司行號</small></p>
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
 
 <script>
 var jumboHeight = $('.jumbotron').outerHeight();
