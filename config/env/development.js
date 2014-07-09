@@ -2,10 +2,12 @@
 
 module.exports = {
 	//db: 'mongodb://localhost/mean-dev',
-	db: 'mongodb://gwofu:88888888@oceanic.mongohq.com:10063/xindong',
+	db: 'mongodb://gwofu:zxcvbnm,@oceanic.mongohq.com:10063/xindong',
 
 	app: {
-		title: '-`♥´- development'
+		title: '-`♥´- development',
+		description: '心動時間銀行, XinDong Time Bank',
+		keywords: '心動時間銀行, mongodb, express, angularjs, node.js, mongoose, passport'
 	},
 	facebook: {
 		clientID: '240618009471705',
