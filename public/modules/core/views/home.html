@@ -1,8 +1,8 @@
 <section data-ng-controller="HomeController">
 	<div class="bg"></div>
-	<div class="jumbotron">
+	<div class="">
 		<div class="row">
-			<div class="col-md-3">
+			<div class="logo col-md-3">
 				<img src="/img/king-fish.jpg" class="img-circle">
 			</div>
 			<div class="col-md-offset-1 col-md-8">
@@ -89,13 +89,13 @@
 </div>
 
 <script>
-var jumboHeight = $('.jumbotron').outerHeight();
-function parallax(){
-	var scrolled = $(window).scrollTop();
-	$('.bg').css('height', (jumboHeight-scrolled) + 'px');
-}
+// var jumboHeight = $('.jumbotron').outerHeight();
+// function parallax(){
+// 	var scrolled = $(window).scrollTop();
+// 	$('.bg').css('height', (jumboHeight-scrolled) + 'px');
+// }
 
-$(window).scroll(function(e){
-	parallax();
-});
+// $(window).scroll(function(e){
+// 	parallax();
+// });
 </script>
