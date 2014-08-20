@@ -103,3 +103,10 @@
 .section-header::before {
 	content: '';
 }
+
+footer {
+	margin-top: 50px;
+	margin-bottom: 30px;
+	width: 100%;
+	text-align: center;
+}
