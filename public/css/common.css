@@ -235,3 +235,9 @@ input[type=checkbox]:checked + label:before {
   display: table;
   clear: both;
 }
+
+
+.navbar-inverse .navbar-nav > li > a,
+.navbar-inverse .navbar-brand {
+	color: #FFF;
+}
