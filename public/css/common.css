@@ -239,5 +239,11 @@ input[type=checkbox]:checked + label:before {
 
 .navbar-inverse .navbar-nav > li > a,
 .navbar-inverse .navbar-brand {
-	color: #FFF;
+	color: WhiteSmoke ;
+}
+
+.navbar-inverse .navbar-nav > li > a:hover,
+.navbar-inverse .navbar-brand:hover {
+	color: silver;
+	text-decoration: underline;
 }
