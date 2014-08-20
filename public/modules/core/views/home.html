@@ -1,49 +1,55 @@
-<section data-ng-controller="HomeController">
-	<div class="bg"></div>
-	<div class="">
-		<div class="row">
-			<div class="logo col-md-3">
-				<img src="/img/king-fish.jpg" class="img-circle">
+<section>
+	<div class="row siteDescriptionBox">
+		<div class="col-md-12 col-sm-12 col-xs-12">
+			<div class="col-md-1 col-sm-2 col-xs-12">
+				<img src="/img/king-fish.jpg" class="img-circle logo">
 			</div>
-			<div class="col-md-offset-1 col-md-8">
-				<div ng-non-bindable id="myCarousel" class="carousel slide" data-ride="carousel">
-					<ol class="carousel-indicators">
-						<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-						<li data-target="#myCarousel" data-slide-to="1"></li>
-					</ol>
-					<div class="carousel-inner">
-						<div class="item active">
-							<div class="container">
-								<h2>XinDong Time Bank</h2>
-								<p>
-									<br>
-									Volunteer time bank platform - Use the concept of time bank. Members provide services for other members to earn service hour. Service hours can then be used to get services provided by other members.</p>
-								<div class="carousel-caption">
-								</div>
-							</div>
-						</div>
-						<div class="item">
-							<div class="container">
-								<h2>心動時間銀行</h2>
-								<p>
-													 整合志工服務與時間銀行的觀念, 創建一個交易服務時數 (Service Hour) 以地圖為導向的網路平台. 服務時數的取得方法有兩種: 完成別人要求的服務項目或提供等價物品的捐贈或捐款. 特別是老弱婦孺, 學生或失業者, 利用自己的才能或時間服務他人和社區, 不但可以拓展人際關係豐富精神生活, 並且獲得的服務時數可用來換取其他的服務或商品. 希望這樣的一個平台能夠促進人與人之間的交流而讓生活更有意義.
-								</p>
-								<div class="carousel-caption">
-								</div>
-							</div>
-						</div>
-					</div>
-					<a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
-					<a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
-				</div>
+			<div class="col-md-offset-1 col-md-10 col-sm-10 col-xs-12">
+				<h1 class="OpenSans">XinDong Time Bank</h1>
+				<p class="OpenSansLight">Volunteer time bank platform - Use the concept of time bank. Members provide services for other members to earn service hour. Service hours can then be used to get services provided by other members.</p>
 			</div>
 		</div>
 	</div>
+</section>
 
+<section data-ng-controller="HomeController">
+	<div class="bg"></div>
 
 	<div class="row">
-		<div data-ng-repeat="event in events">
-			<div class="col-xs-12 col-sm-6 col-md-4">
+		<div class="col-md-offset-2 col-md-8 col-md-offset-2 box10 col-sm-12 col-xs-12">
+			<div class="col-md-6 col-sm-6 col-xs-12">
+				<h2 class="OpenSans">Free Account</h2>
+				<p class="OpenSansLight">You are not enrolled, but you have access to all of our free content.</p>
+			</div>
+			<div class="col-md-offset-1 col-md-5 col-sm-offset-1 col-sm-5 col-xs-12">
+				<a class="enroll-button" href="/#!/signup">ENROLL NOW</a>
+			</div>
+		</div>
+	</div>
+	
+	<br><br>
+
+	<div class="row">
+		<div class="col-md-offset-2 col-md-8 col-md-offset-2 no-padding">
+			<div class="section-header">Search Events</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-offset-2 col-md-8 col-md-offset-2 no-padding">
+			<div class="input-group input-group-lg">
+	      <input type="text" class="form-control" ng-model="searchText">
+	      <span class="input-group-btn">
+	        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+	      </span>
+	    </div>
+		</div>
+	</div>
+
+	<br><br>
+
+	<div class="row">
+		<div data-ng-repeat="event in events | filter:searchText">
+			<div class="col-md-offset-2 col-md-8 col-md-offset-2 no-padding">
 				<div class="panel panel-primary">
 					<div class="panel-heading">
 						<h3 class="panel-title">
@@ -61,6 +67,7 @@
 		</div>
 	</div>
 </section>
+
 
 <!-- Modal -->
 <div class="modal fade" id="learnmore" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

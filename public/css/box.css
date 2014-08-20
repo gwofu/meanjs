@@ -1,0 +1,105 @@
+.siteDescriptionBox {
+	background: #E4E3D5;
+}
+
+.siteDescriptionBox .OpenSans {
+	font: 800 3.5em 'Open Sans', sans-serif;
+}
+
+.siteDescriptionBox .OpenSansLight {
+	font-size: 2.5em;
+}
+
+.box10 {
+	background: #FFFFFF;
+	box-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+	display: block;
+	box-sizing: border-box;
+	padding: 1em;
+	margin-top: 2em;
+}
+
+.OpenSans {
+	font: 800 2em 'Open Sans', sans-serif;
+	color: rgb(63,73,68);
+	margin-top: 0;
+}
+
+.OpenSansNormal {
+	font: 800 1.5em 'Open Sans', sans-serif;
+	color: rgb(63,73,68);
+}
+
+.OpenSansLight {
+	font-size: 1.5em;
+	font-family: 'Open Sans Condensed', sans-serif;
+	font-weight: 100;
+}
+
+@media only screen and (min-width : 768px) {
+		/* Make Navigation Toggle on Desktop Hover */
+		.dropdown:hover .dropdown-menu {
+				display: block;
+		}
+		img.logo {
+			display: block;
+			margin: 0 auto;
+			width: 120px;
+			height: 100px;
+			margin-top: 2em; 
+		}
+}
+
+@media (max-width: 767px) {
+	.logo {
+		display: none;
+	}
+	.enroll-button {
+		border: 0;
+		padding: 0;
+	}
+}
+
+@media (min-width: 768px) {
+	a.enroll-button {
+		position: relative;
+		top: 2em;
+		font: 800 1.5em 'Open Sans', sans-serif;
+		color: rgb(61, 134, 197);
+		background: #FFFFFF;
+		border: 2px solid rgb(61, 134, 197);
+		padding: 10px;
+	}
+}
+
+.search-bar {
+	box-sizing: border-box;
+	float: left;
+	vertical-align:top;
+	display: inline;
+	font: 400 2em 'Open Sans', sans-serif;
+	width: 90%;
+}
+.search-burron {
+	width: 10%;
+	font-size: 2em;
+	color: #FFFFFF;
+	background: rgb(61, 134, 197);
+	border: none;
+	padding: 2px;
+}
+
+.no-padding {
+	position: relative;
+	padding: 0;
+}
+
+.section-header {
+	font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+	font-size: 2em;
+	text-transform: uppercase;
+	color: Chocolate;
+}
+.section-header::before {
+	content: '';
+}

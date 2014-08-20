@@ -127,9 +127,11 @@ $(function() {
 		x = e.pageX - dragObj.offset().left;
 		y = e.pageY - dragObj.offset().top;
 	});
+
 	$('#mapmenu').mouseup(function(e) {
 		dragObj = null;
 	});
+	
 	$('#mapmenu').mousemove(function(e) {
 		if (dragObj == null) {
 			return;
