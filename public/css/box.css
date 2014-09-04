@@ -36,6 +36,31 @@
 	font-weight: 100;
 }
 
+.JhengHei {
+	font-family: "微軟正黑體", "Microsoft JhengHei",  Tahoma , Verdana , Arial , sans-serif;
+}
+
+.yahei {
+	font-family: "微软雅黑", "Microsoft yahei",  Tahoma , Verdana , Arial , sans-serif;
+}
+
+.SimSun {
+	font-family: "宋体", "SimSun",  Tahoma , Verdana , Arial , sans-serif;
+}
+
+.NSimSun {
+	font-family: "新宋体", "NSimSun",  Tahoma , Verdana , Arial , sans-serif;
+}
+
+.PMingLiU {
+	font-family: "新細明體", "PMingLiU",  Tahoma , Verdana , Arial , sans-serif;
+}
+
+.KaiTi {
+	font-family: "楷体", "KaiTi",  Tahoma , Verdana , Arial , sans-serif;
+}
+
+
 @media only screen and (min-width : 768px) {
 		/* Make Navigation Toggle on Desktop Hover */
 		.dropdown:hover .dropdown-menu {
@@ -108,5 +133,4 @@ footer {
 	margin-top: 50px;
 	margin-bottom: 30px;
 	width: 100%;
-	text-align: center;
 }

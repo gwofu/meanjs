@@ -5,15 +5,20 @@
 				<img src="/img/king-fish.jpg" class="img-circle logo">
 			</div>
 			<div class="col-md-offset-1 col-md-10 col-sm-10 col-xs-12">
-				<h1 class="OpenSans">XinDong Time Bank</h1>
-				<p class="OpenSansLight">Volunteer time bank platform - Use the concept of time bank. Members provide services for other members to earn service hour. Service hours can then be used to get services provided by other members.</p>
+				<h1 class="OpenSans" translate>XINDONG_TIME_BANK</h1>
+				<p class="OpenSansLight" translate>XINDONG_GOAL</p>
 			</div>
 		</div>
 	</div>
 </section>
 
+<section data-ng-controller="HeaderController">
+	<div ng-show="languageKey == 'zh'">
+		<iframe width="560" height="315" src="//www.youtube.com/embed/DpKzge-dwok?rel=0" frameborder="0" allowfullscreen></iframe>
+	</div>
+</section>
+
 <section data-ng-controller="HomeController">
-	<div class="bg"></div>
 
 	<div class="row">
 		<div class="col-md-offset-2 col-md-8 col-md-offset-2 box10 col-sm-12 col-xs-12">
@@ -37,11 +42,11 @@
 	<div class="row">
 		<div class="col-md-offset-2 col-md-8 col-md-offset-2 no-padding">
 			<div class="input-group input-group-lg">
-	      <input type="text" class="form-control" ng-model="searchText">
-	      <span class="input-group-btn">
-	        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
-	      </span>
-	    </div>
+				<input type="text" class="form-control" ng-model="searchText">
+				<span class="input-group-btn">
+					<button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+				</span>
+			</div>
 		</div>
 	</div>
 
@@ -106,3 +111,13 @@
 // 	parallax();
 // });
 </script>
+
+<div ng-hide="true">
+JhengHei: <h1 class="JhengHei" translate>XINDONG_TIME_BANK</h1>
+yaheih1: <h1 class="yahei" translate>XINDONG_TIME_BANK</h1>
+SimSun: <h1 class="SimSun" translate>XINDONG_TIME_BANK</h1>
+NSimSun: <h1 class="NSimSun" translate>XINDONG_TIME_BANK</h1>
+PMingLiU: <h1 class="PMingLiU" translate>XINDONG_TIME_BANK</h1>
+OpenSans: <h1 class="OpenSans" translate>XINDONG_TIME_BANK</h1>
+KaiTi: <h1 class="KaiTi" translate>XINDONG_TIME_BANK</h1>
+</div>

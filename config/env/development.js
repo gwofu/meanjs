@@ -7,7 +7,7 @@ module.exports = {
 	app: {
 		title: '-`♥´- development',
 		description: '心動時間銀行, XinDong Time Bank',
-		keywords: '心動時間銀行, mongodb, express, angularjs, node.js, mongoose, passport'
+		keywords: '心動時間銀行, 時間銀行, 志工, mongodb, express, angularjs, node.js, mongoose, passport'
 	},
 	facebook: {
 		clientID: '240618009471705',

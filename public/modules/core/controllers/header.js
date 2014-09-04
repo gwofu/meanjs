@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('mean.core').controller('HeaderController', ['$scope', 'Authentication',
-	function($scope, Authentication) {
+angular.module('mean.core').controller('HeaderController', ['$translate', '$scope', 'Authentication',
+	function($translate, $scope, Authentication) {
 		$scope.authentication = Authentication;
 		$scope.isCollapsed = false;
 		$scope.format = 'M/d/yy h:mm:ss a';
@@ -49,6 +49,10 @@ angular.module('mean.core').controller('HeaderController', ['$scope', 'Authentic
 
 		$scope.toggleCollapsibleMenu = function() {
 			$scope.isCollapsed = !$scope.isCollapsed;
+		};
+
+		$scope.changeLanguage = function (languageKey) {
+			$translate.use(languageKey);
 		};
 	}
 ]);
