@@ -1,5 +1,11 @@
 {
 	"XINDONG_TIME_BANK": "XinDong Time Bank",
 	"XINDONG_GOAL": "Volunteer time bank platform - Use the concept of time bank. Members provide services for other members to earn service hour. Service hours can then be used to get services provided by other members.",
+	"FREE_ACCOUNT_TITLE": "Free Account",
+	"FREE_ACCOUNT_DESC": "You are not enrolled, but you have access to all of our free content.",
+	"ENROLL_NOW": "ENROLL NOW",
+	"SEARCH_EVENTS": "Search Events",
+	"SIGN_UP": "Signup",
+	"SIGN_IN": "Signin",
 	" ": " "
 }
