@@ -18,15 +18,9 @@ body {
 	background-color:#F4F4F4;
 	font-family: "Whitney",helvetica,arial,sans-serif;
 }
-
 #map-canvas { 
-	height: 90%;
+	height: 450px;
 }
-
-.content, .container > div, .container > div > div, container > div > div {
-	height: 100%;
-}
-
 #small-map-canvas {
 	height: 200px;
 	margin: 0px;
