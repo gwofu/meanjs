@@ -16,10 +16,10 @@
 					</div>
 					</div>
 					<div class="col-md-5 col-md-offset-1">
-					<div class="form-group">
-						<label class="control-label">Start Date/Time</label>
+					<div class="form-group" ng-class="{'has-error': eventForm.startDate.$invalid && eventForm.startDate.$dirty}">
+						<label class="control-label" for]"startDate">Start Date/Time</label>
 						<div class="input-group date form_datetime_s">
-							<input class="form-control" size="16" type="text" data-ng-model="date" readonly required>
+							<input class="form-control" size="16" type="text" data-ng-model="date" name="startDate" readonly required>
 							<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
 							<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
 						</div>
@@ -28,18 +28,18 @@
 				</div>
 				<div class="row">
 					<div class="col-md-5">
-					<div class="form-group">
-						<label class="control-label" for="content">Event Description</label>
+					<div class="form-group" ng-class="{'has-error': eventForm.desc.$invalid && eventForm.desc.$dirty}">
+						<label class="control-label" for="desc">Event Description</label>
 						<div class="controls">
-							<textarea data-ng-model="content" id="content" class="form-control" cols="30" rows="3" placeholder="Content"></textarea>
+							<textarea class="form-control" data-ng-model="content" name="desc" cols="30" rows="3" placeholder="Description" required></textarea>
 						</div>
 					</div>
 					</div>
 					<div class="col-md-5 col-md-offset-1">
-					<div class="form-group">
-						<label class="control-label">End Date/Time</label>
+					<div class="form-group" ng-class="{'has-error': eventForm.endDate.$invalid && eventForm.endDate.$dirty}">
+						<label class="control-label" for="endDate">End Date/Time</label>
 						<div class="input-group date form_datetime_e">
-							<input class="form-control" size="16" type="text" data-ng-model="endDate" readonly required>
+							<input class="form-control" size="16" type="text" data-ng-model="endDate" name="endDate" readonly required>
 							<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
 							<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
 						</div>
@@ -49,11 +49,11 @@
 				
 				<div class="row">
 					<div class="col-md-5">
-						<div class="form-group">
+						<div class="form-group" ng-class="{'has-error': eventForm.tyep.$invalid && eventForm.type.$dirty}">
 							<label class="control-label" for="type">Event Type</label>
 							<div class="controls">
-								<select class="form-control" data-ng-model="type" ng-options="option.name as option.name group by option.value for option in options" required>
-									<option value="" selected> Please Select </option>
+								<select class="form-control" data-ng-model="type" name="type" ng-options="option.name as option.name group by option.value for option in options" required>
+									<option value="" disabled selected> Please Select </option>
 								</select>
 							</div>
 						</div>
@@ -63,7 +63,7 @@
 							<label class="control-label" for="type">Event Location</label>
 							<div class="controls">
 								<select class="form-control" data-ng-model="addressId" ng-options="a._id as a.street for a in addresses" required>
-									<option value="" selected> Please Select </option>
+									<option value="" disabled selected> Please Select </option>
 								</select>
 							</div>
 						</div>
