@@ -48,8 +48,8 @@ EventSchema.statics = {
 	}
 };
 
-mongoose.model('Event', EventSchema);
-
 EventSchema.methods.findNear = function(cb) {
 	return this.model('Event').find({geo: { $nearSphere: this.geo, $maxDistance: 0.01} }, cb);
 };
+
+mongoose.model('Event', EventSchema);
