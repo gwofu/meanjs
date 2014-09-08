@@ -255,3 +255,7 @@ input[type=checkbox]:checked + label:before {
 .navbar-inverse .navbar-brand:hover {
 	text-decoration: underline;
 }
+
+.dropdown-menu > li > a {
+	cursor: pointer;
+}
