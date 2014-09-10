@@ -13,14 +13,14 @@ angular.module('mean.common')
 
 	$scope.getUsers = function() {
 		mySocketService.getUsers(function() {
-			alert("getUsers");
+			console.log('getUsers');
 		});
-	}
+	};
 
 	$scope.getUserCount = function() {
 		mySocketService.getUserCOunt(function() {
-			alert("getUserCount");
+			console.log('getUserCount');
 		});
-	}
+	};
 
 }]);

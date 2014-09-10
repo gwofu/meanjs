@@ -2,42 +2,14 @@
 
 angular.module('mean.events')
 .controller('EventsController',
-	['$scope', '$stateParams', '$location', '$filter', 'Authentication', 'Events', 'Addresses', 'Messages', 'MessageService', 'AppliedEventsService',
-	function($scope, $stateParams, $location, $filter, Authentication, Events, Addresses, Messages, MessageService, AppliedEventsService) {
+	['$scope', '$stateParams', '$location', '$filter', 'Authentication', 'Events', 'Addresses', 'Messages', 'MessageService', 'AppliedEventsService', 'Admin',
+	function($scope, $stateParams, $location, $filter, Authentication, Events, Addresses, Messages, MessageService, AppliedEventsService, Admin) {
+
+		$scope.options = Admin.query(function(data) {
+			$scope.options = data;
+		});
 
 		$scope.authentication = Authentication;
-		$scope.options = [{
-			name: 'Community Service',
-			value: 'Service'
-		}, {
-			name: 'Neighborhood Watch',
-			value: 'Service'
-		}, {
-			name: 'Neighborhood Cleanup',
-			value: 'Service'
-		}, {
-			name: 'Transportation',
-			value: 'Service'
-		}, {
-			name: 'Day Care',
-			value: 'Service'
-		}, {
-			name: 'Sports',
-			value: 'Activities'
-		}, {
-			name: 'Chess',
-			value: 'Activities'
-		}, {
-			name: 'Hiking',
-			value: 'Activities'
-		}, {
-			name: 'Tutoring',
-			value: 'Education'
-		}, {
-			name: 'Instrument',
-			value: 'Education'
-		}];
-
 		$scope.showSetting = false;
 		$scope.addresses = [];
 		$scope.appliedEvents = [];

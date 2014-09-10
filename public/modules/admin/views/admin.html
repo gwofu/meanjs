@@ -1,0 +1,42 @@
+
+<section class="container" data-ng-controller="AdminController" data-ng-init="init()">
+
+	<div class="row">
+
+		<div class="col-md-2">
+			<div class="adminNavbar">
+				<div class="list-group">
+					<a href="javascript:void(0)" data-ng-click="getEventTypes()" class="list-group-item">Event Types</a>
+					<a href="javascript:void(0)" class="list-group-item">Link 1</a>
+					<a href="javascript:void(0)" class="list-group-item">Link 2</a>
+					<a href="javascript:void(0)" class="list-group-item">Link 3</a>
+					<a href="javascript:void(0)" class="list-group-item">Link 4</a>
+					<a href="javascript:void(0)" class="list-group-item">Link 5</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-10">
+
+			<table class="table table-striped table-bordered table-hover">
+				<thead>
+					<tr><th>NAME</th><th>TYPE</th><th>ACTIONS<a data-ng-click="add()"></a></th></tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><input type="text" data-ng-model="eventType.name" placeholder="Enter name"></input></td><td><input type="text" data-ng-model="eventType.value" placeholder="Enter event type"></input></td><td><a data-ng-click="addEventType()"><i class="fa fa-plus-square"></i></a></td>
+					</tr>
+					<tr data-ng-repeat="option in options | orderBy: ['value', 'name']">
+						<td>{{option.name}}</td><td>{{option.value}}</td><td><a data-ng-click="delete(option, $index)"><i class="fa fa-trash-o"></i></a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+
+
+	</div>
+
+</section>
+
+

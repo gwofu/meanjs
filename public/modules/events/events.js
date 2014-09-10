@@ -4,7 +4,7 @@
 ApplicationConfiguration.registerModule('mean.events');
 
 angular.module('mean.core')
-.directive('myCustomer', function() {
+.directive('userMenu', function() {
 	return {
 		template: '',
 		link: function (scope, element) {

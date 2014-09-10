@@ -4,7 +4,7 @@ module.exports = function(app) {
 	var users = require('../../app/controllers/users');
 	var messages = require('../../app/controllers/messages');
 
-	// Article Routes
+	// Message Routes
 	app.get('/messages', messages.list);
 	app.post('/messages', users.requiresLogin, messages.create);
 	app.get('/messages/:messageId', messages.read);
